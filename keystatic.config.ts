@@ -1,13 +1,29 @@
-import { config, fields, collection, singleton } from '@keystatic/core';
+import { config, fields, collection, singleton, type LocalConfig, type CloudConfig } from '@keystatic/core';
+
+const isProd = process.env.NODE_ENV === 'production';
+
+const localConfig: LocalConfig['storage'] = {
+  kind: 'local'
+}
+const cloudConfig: CloudConfig['storage'] = {
+  kind: 'cloud'
+}
 
 export default config({
-  storage: {
-    kind: 'cloud',
-  },
+  storage: isProd ? cloudConfig : localConfig,
   cloud: {
     project: 'victoria/aris-art-design',
   },
   singletons: {
+    socialLinks: singleton({
+      label: "Social Links",
+      path: 'src/content/social-links',
+      schema: {
+        twitter: fields.text({ label: 'Twitter', description: 'Twitter username' }),
+        instagram: fields.text({ label: 'Twitter', description: 'IG handle username' }),
+        facebook: fields.text({ label: 'Twitter', description: 'facebook username' }),
+      }
+    }),
     settings: singleton({
       label: 'Settings',
       path: 'src/content/settings',
@@ -19,7 +35,10 @@ export default config({
     }),
     about: singleton({
       label: 'About',
-      path: 'src/content/about',
+      path: 'src/content/pages/about',
+      format: {
+        contentField: 'content'
+      },
       schema: {
         title: fields.text({ label: 'Title' }),
         content: fields.document({
@@ -33,13 +52,34 @@ export default config({
           },
         }),
       },
+    }),
+    home: singleton({
+      label: 'Home',
+      path: 'src/content/pages/home',
+      format: {
+        contentField: 'content'
+      },
+      schema: {
+        title: fields.text({ label: 'Title' }),
+        showPosts: fields.checkbox({ label: 'Show Posts' }),
+        content: fields.document({
+          label: 'Content',
+          formatting: true,
+          dividers: true,
+          links: true,
+          images: {
+            directory: 'src/assets/images/home',
+            publicPath: '../../assets/images/home/',
+          },
+        }),
+      },
     })
   },
   collections: {
     artwork: collection({
       label: 'Artworks',
       slugField: 'title',
-      path: 'src/content/artwork/*/index',
+      path: 'src/content/artwork/*',
       format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
@@ -56,6 +96,7 @@ export default config({
           ],
           defaultValue: 'uncategorized'
         }),
+        public: fields.checkbox({ label: 'Public', defaultValue: true }),
         image: fields.image({
           label: 'Image',
           directory: 'public/images/artwork',
@@ -70,7 +111,7 @@ export default config({
             directory: 'src/assets/images/posts',
             publicPath: '../../assets/images/posts/',
           },
-        }),
+        })
       },
     }),
     posts: collection({

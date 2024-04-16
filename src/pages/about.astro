@@ -1,10 +1,16 @@
 ---
-import { getCollection } from 'astro:content'
+import { getEntry } from 'astro:content'
 import Layout from '../layouts/Layout.astro'
+
+const aboutPage = await getEntry('pages', 'about')
+const { Content } = await aboutPage.render()
 ---
 
 <Layout title="Keystatic & Astro's Content Collections">
-  <div class="bg-zinc-50">
-    <h1>About</h1>
+  <div class="p-10 w-full">
+    <h2 class="mb-8 text-3xl font-bold">{ aboutPage.data.title ?? 'About'}</h2>
+    <div class="prose prose-zinc max-w-none dark:prose-invert">
+      <Content />
+    </div>
   </div>
 </Layout>

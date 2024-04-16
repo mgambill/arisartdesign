@@ -15,5 +15,4 @@ const artworks = defineCollection({
   }),
 })
 
-
 export const collections = { posts, artworks }
