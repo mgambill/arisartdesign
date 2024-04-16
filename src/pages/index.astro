@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content"
+import Layout from "../layouts/Layout.astro"
+
+const posts = await getCollection("posts")
+const artworks = await getCollection("artwork")
+---
+
+<Layout title="Keystatic & Astro's Content Collections">
+  <div class="bg-zinc-50">
+    <img src="/hero.jpeg" alt="" class="w-full aspect-video">
+    <h1>Keystatic ⚡️ + Astro 🚀</h1>
+    <p>
+      This homepage shows how to load data from Astro's content collections.
+    </p>
+    <p>
+      <a href="/keystatic">Click here to visit the Admin UI</a>, or the link
+      below to view a post in the collection.
+    </p>
+    <h2>Artworks</h2>
+    <ul class="grid grid-flow-col">
+      {
+        artworks.map((artwork) => (
+          <li>
+            <a href={`/gallery/${artwork.slug}`}>
+              <img
+                src={`../${artwork.data.image}`}
+                alt={artwork.data.title}
+                class="size-52 object-contain"
+              />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <h2>Posts</h2>
+    <ul>
+      {
+        posts.map((post) => (
+          <li>
+            <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Layout>

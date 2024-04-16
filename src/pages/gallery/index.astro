@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '../../layouts/Layout.astro'
+
+const artworks = await getCollection('artwork')
+---
+
+<Layout title="Keystatic & Astro's Content Collections">
+  <div class="bg-zinc-50">
+    <h2>Artworks</h2>
+    <ul class="grid grid-flow-col">
+      {
+        artworks.map((artwork) => (
+          <li>
+            <a href={`/gallery/${artwork.slug}`}>
+              <img src={`../${artwork.data.image}`} alt={artwork.data.title} class="size-52 object-contain" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Layout>
