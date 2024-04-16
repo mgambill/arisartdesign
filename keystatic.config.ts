@@ -4,6 +4,9 @@ export default config({
   storage: {
     kind: 'local',
   },
+  cloud: {
+    project: 'victoria/aris-art-design',
+  },
   singletons: {
     settings: singleton({
       label: 'Settings',
