@@ -8,6 +8,6 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
   integrations: [react(), markdoc(), keystatic(), tailwind()],
-  output: "server",
+  output: "hybrid",
   adapter: netlify()
 });
