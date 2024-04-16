@@ -1,20 +1,20 @@
 ---
-import { getCollection } from 'astro:content'
-import { getEntry } from 'astro:content'
-import Layout from '../layouts/Layout.astro'
+import { getCollection } from "astro:content"
+import { getEntry } from "astro:content"
+import Layout from "../layouts/Layout.astro"
 
-const posts = await getCollection('posts')
-const artworks = await getCollection('artwork')
+const posts = await getCollection("posts")
+const artworks = await getCollection("artwork")
 
-const homePage = await getEntry('pages', 'home')
+const homePage = await getEntry("pages", "home")
 const { Content } = await homePage.render()
 ---
 
 <Layout title="Keystatic & Astro's Content Collections">
-  <div class="bg-zinc-50 w-full">
+  <div class="w-full">
     <img src="/hero.jpeg" alt="" class="aspect-video w-full" />
     <div class="w-full p-10">
-      <h2 class="mb-8 text-3xl font-bold">{homePage.data.title ?? 'About'}</h2>
+      <h2 class="mb-8 text-3xl font-bold">{homePage.data.title ?? "About"}</h2>
       <div class="prose prose-zinc max-w-none dark:prose-invert">
         <Content />
       </div>

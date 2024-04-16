@@ -14,6 +14,13 @@ export default config({
   cloud: {
     project: 'victoria/aris-art-design',
   },
+  ui: {
+    navigation: {
+      "Site": ['artwork', 'posts'],
+      "Pages": ['about', 'home'],
+      'Footer Links': ['socialLinks', '---', 'settings']
+    }
+  },
   singletons: {
     socialLinks: singleton({
       label: "Social Links",

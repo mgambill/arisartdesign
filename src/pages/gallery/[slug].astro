@@ -1,28 +1,36 @@
 ---
-import { getCollection, getEntry } from 'astro:content'
-import Layout from '../../layouts/Layout.astro'
-
+import { getCollection, getEntry } from "astro:content"
+import Layout from "../../layouts/Layout.astro"
+import Breadcrumb from "src/components/Breadcrumb.astro"
 const { slug } = Astro.params
-if (!slug) throw new Error('Slug not found')
+if (!slug) throw new Error("Slug not found")
 console.log(slug)
-const post = await getEntry('artwork', slug)
+const post = await getEntry("artwork", slug)
 console.log(post)
 
-if (!post) throw new Error('No post found for this slug')
+if (!post) throw new Error("No post found for this slug")
 const { Content } = await post.render()
 
 // Generate static pages
 export async function getStaticPaths() {
-  const artwork = await getCollection('artwork')
+  const artwork = await getCollection("artwork")
   return artwork.map((post) => ({ params: { slug: post.slug } }))
 }
+const links = [
+  { label: "Gallery", url: "/gallery" },
+  { label: post.data.title },
+]
 ---
 
 <Layout title={post.data.title}>
   <div class="relative isolate bg-white text-zinc-800">
-    <div style={{ 'background-image': `url(../${post.data.image})` }} class="absolute inset-0 left-1/3 -z-10 flex-1 bg-cover bg-right bg-no-repeat p-10 opacity-5 grayscale"></div>
-    <div class="p-10 relative">
-      <a class="absolute right-8 top-8 hover:bg-black hover:text-zinc-100 px-4 py-1 cursor-pointer block" href="/gallery">Back</a>
+    <div
+      style={{ "background-image": `url(../${post.data.image})` }}
+      class="absolute inset-0 left-1/3 -z-10 flex-1 bg-cover bg-right bg-no-repeat p-10 opacity-5 grayscale"
+    >
+    </div>
+    <div class="relative p-10">
+      <Breadcrumb links={links} />
       <div class="grid grid-cols-3 gap-10">
         <img src={`../${post.data.image}`} alt={post.data.title} />
         <div class="prose col-span-2">

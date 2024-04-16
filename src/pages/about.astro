@@ -1,14 +1,17 @@
 ---
-import { getEntry } from 'astro:content'
-import Layout from '../layouts/Layout.astro'
+import { getEntry } from "astro:content"
+import Layout from "../layouts/Layout.astro"
+import Breadcrumb from "src/components/Breadcrumb.astro"
 
-const aboutPage = await getEntry('pages', 'about')
+const aboutPage = await getEntry("pages", "about")
 const { Content } = await aboutPage.render()
+const links = [{ label: "About" }]
 ---
 
 <Layout title="Keystatic & Astro's Content Collections">
-  <div class="p-10 w-full">
-    <h2 class="mb-8 text-3xl font-bold">{ aboutPage.data.title ?? 'About'}</h2>
+  <div class="w-full p-10">
+    <Breadcrumb links={links} />
+    <h2 class="mb-8 text-3xl font-bold">{aboutPage.data.title ?? "About"}</h2>
     <div class="prose prose-zinc max-w-none dark:prose-invert">
       <Content />
     </div>
