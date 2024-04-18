@@ -8,7 +8,7 @@ const { Content } = await aboutPage.render()
 const links = [{ label: "About" }]
 ---
 
-<Layout title="Keystatic & Astro's Content Collections">
+<Layout title="About">
   <div class="w-full p-10">
     <Breadcrumb links={links} />
     <h2 class="mb-8 text-3xl font-bold">{aboutPage.data.title ?? "About"}</h2>

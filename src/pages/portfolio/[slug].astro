@@ -27,7 +27,7 @@ const links = [{ label: 'Portfolio', url: '/portfolio' }, { label: entry.data.ti
     <div class="relative p-10">
       <Breadcrumb links={links} />
       <div class="grid grid-cols-3 gap-10">
-        <img src={`../${entry.data.image}`} alt={entry.data.title} />
+        <img src={entry.data.image} alt={entry.data.title} />
         <div class="prose col-span-2">
           <h2 class="mb-8 text-3xl font-bold">{entry.data.title}</h2>
           <Content />

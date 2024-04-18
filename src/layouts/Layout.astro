@@ -1,5 +1,6 @@
 ---
 import '../styles.css'
+import { ViewTransitions } from 'astro:transitions'
 
 export interface Props {
   title: string
@@ -31,10 +32,11 @@ const isProd = process.env.NODE_ENV === 'production'
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>Aris Art Design | {title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <ViewTransitions />
   </head>
   <body class="grid min-h-dvh grid-rows-[auto,1fr,auto] bg-stone-100 dark:bg-zinc-900 dark:text-zinc-300">
     <header class="bg-stone-50 dark:bg-transparent">
