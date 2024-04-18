@@ -7,7 +7,7 @@ export interface Props {
 
 const { title } = Astro.props
 const pathname = new URL(Astro.request.url).pathname
-const menu = [{ href: '/about', text: 'About Me' }, { logo: true }, { href: '/portfolio', text: 'Portfolio' }]
+const menu = [{ href: '/projects', text: 'Projects' }, { logo: true }, { href: '/portfolio', text: 'Portfolio' }]
 
 const isCurrent = (url: string | undefined) => {
   return pathname.startsWith(url!) ? 'text-blue-500 dark:text-zinc-100' : ''
@@ -49,7 +49,7 @@ const isProd = process.env.NODE_ENV === 'production'
                   </a>
                 </li>
               ) : (
-                <li class={`px-10 font-medium uppercase font-serif ${isCurrent(href)}`}>
+                <li class={`px-10 font-serif font-medium uppercase ${isCurrent(href)}`}>
                   <a href={href}>{text}</a>
                 </li>
               )

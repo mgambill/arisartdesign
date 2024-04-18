@@ -4,30 +4,30 @@ import Layout from '../../layouts/Layout.astro'
 import Breadcrumb from 'src/components/Breadcrumb.astro'
 const { slug } = Astro.params
 if (!slug) throw new Error('Slug not found')
-console.log(slug)
-const post = await getEntry('portfolio', slug)
-console.log(post)
 
-if (!post) throw new Error('No post found for this slug')
-const { Content } = await post.render()
+const entry = await getEntry('portfolio', slug)
+console.log(entry)
+
+if (!entry) throw new Error('No entry found for this slug')
+const { Content } = await entry.render()
 
 // Generate static pages
 export async function getStaticPaths() {
   const portfolio = await getCollection('portfolio')
   return portfolio.map((post) => ({ params: { slug: post.slug } }))
 }
-const links = [{ label: 'Gallery', url: '/gallery' }, { label: post.data.title }]
+const links = [{ label: 'Portfolio', url: '/portfolio' }, { label: entry.data.title ?? 'Untitled' }]
 ---
 
-<Layout title={post.data.title}>
+<Layout title={entry.data.title}>
   <div class="relative isolate bg-white text-zinc-800">
-    <div style={{ 'background-image': `url(../${post.data.image})` }} class="absolute inset-0 left-1/3 -z-10 flex-1 bg-cover bg-right bg-no-repeat p-10 opacity-5 grayscale"></div>
+    <div style={{ 'background-image': `url(../${entry.data.image})` }} class="absolute inset-0 left-1/3 -z-10 flex-1 bg-cover bg-right bg-no-repeat p-10 opacity-5 grayscale"></div>
     <div class="relative p-10">
       <Breadcrumb links={links} />
       <div class="grid grid-cols-3 gap-10">
-        <img src={`../${post.data.image}`} alt={post.data.title} />
+        <img src={`../${entry.data.image}`} alt={entry.data.title} />
         <div class="prose col-span-2">
-          <h2 class="mb-8 text-3xl font-bold">{post.data.title}</h2>
+          <h2 class="mb-8 text-3xl font-bold">{entry.data.title}</h2>
           <Content />
         </div>
       </div>

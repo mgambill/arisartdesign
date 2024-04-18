@@ -97,73 +97,18 @@ export default config({
         })
       }
     }),
-    artwork: collection({
-      label: 'Artworks',
-      slugField: 'title',
-      path: 'src/content/artwork/*',
-      format: { contentField: 'content' },
-      schema: {
-        title: fields.slug({ name: { label: 'Title' } }),
-        category: fields.select({
-          label: 'Role',
-          description: "Artwork category",
-          options: [
-            { label: 'Digital Art', value: 'digital-art' },
-            { label: 'Illustration', value: 'illustration' },
-            { label: 'Projects', value: 'projects' },
-            { label: 'Print', value: 'print' },
-            { label: 'Sketch', value: 'sketch' },
-            { label: 'Uncategorized', value: 'uncategorized' },
-          ],
-          defaultValue: 'uncategorized'
-        }),
-        public: fields.checkbox({ label: 'Public', defaultValue: true }),
-        image: fields.image({
-          label: 'Image',
-          directory: 'public/images/artwork',
-          publicPath: '../images/artwork',
-        }),
-        date: fields.date({
-          label: 'Event date',
-          description: 'The date of the event'
-        }),
-        content: fields.document({
-          label: 'Content',
-          formatting: true,
-          dividers: true,
-          links: true,
-          images: {
-            directory: 'src/assets/images/posts',
-            publicPath: '../../assets/images/posts/',
-          },
-        })
-      },
-    }),
-    project: collection({
+    projects: collection({
       label: 'Projects',
       slugField: 'title',
-      path: 'src/content/project/*',
+      path: 'src/content/projects/*',
       format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
-        category: fields.select({
-          label: 'Role',
-          description: "Artwork category",
-          options: [
-            { label: 'Digital Art', value: 'digital-art' },
-            { label: 'Illustration', value: 'illustration' },
-            { label: 'Projects', value: 'projects' },
-            { label: 'Print', value: 'print' },
-            { label: 'Sketch', value: 'sketch' },
-            { label: 'Uncategorized', value: 'uncategorized' },
-          ],
-          defaultValue: 'uncategorized'
-        }),
         public: fields.checkbox({ label: 'Public', defaultValue: true }),
         image: fields.image({
           label: 'Image',
-          directory: 'public/images/project',
-          publicPath: '../images/project',
+          directory: 'public/images/projects',
+          publicPath: '/images/projects',
         }),
         date: fields.date({
           label: 'Event date',
@@ -175,8 +120,8 @@ export default config({
           dividers: true,
           links: true,
           images: {
-            directory: 'src/assets/images/projects',
-            publicPath: '../../assets/images/projects/',
+            directory: 'public/images/projects',
+            publicPath: '/images/projects',
           },
         })
       },
@@ -205,7 +150,7 @@ export default config({
         image: fields.image({
           label: 'Image',
           directory: 'public/images/portfolio',
-          publicPath: '../images/portfolio',
+          publicPath: '/images/portfolio',
         }),
         content: fields.document({
           label: 'Content',
@@ -213,8 +158,8 @@ export default config({
           dividers: true,
           links: true,
           images: {
-            directory: 'src/assets/images/posts',
-            publicPath: '../../assets/images/posts/',
+            directory: 'public/images/portfolio',
+            publicPath: '/images/portfolio',
           },
         })
       },
@@ -233,8 +178,8 @@ export default config({
           dividers: true,
           links: true,
           images: {
-            directory: 'src/assets/images/posts',
-            publicPath: '../../assets/images/posts/',
+            directory: 'src/public/images/posts',
+            publicPath: '../images/posts/',
           },
         }),
       },

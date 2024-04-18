@@ -1,34 +1,27 @@
 ---
-import { getCollection, getEntry } from "astro:content"
-import Layout from "../../layouts/Layout.astro"
-import Breadcrumb from "src/components/Breadcrumb.astro"
+import { getCollection, getEntry } from 'astro:content'
+import Layout from '../../layouts/Layout.astro'
+import Breadcrumb from 'src/components/Breadcrumb.astro'
 const { slug } = Astro.params
-if (!slug) throw new Error("Slug not found")
+if (!slug) throw new Error('Slug not found')
 console.log(slug)
-const post = await getEntry("projects", slug)
+const post = await getEntry('projects', slug)
 console.log(post)
 
-if (!post) throw new Error("No post found for this slug")
+if (!post) throw new Error('No post found for this slug')
 const { Content } = await post.render()
 
 // Generate static pages
 export async function getStaticPaths() {
-  const projects = await getCollection("projects")
+  const projects = await getCollection('projects')
   return projects.map((post) => ({ params: { slug: post.slug } }))
 }
-const links = [
-  { label: "Projects", url: "/projects" },
-  { label: post.data.title },
-]
+const links = [{ label: 'Projects', url: '/projects' }, { label: post.data.title }]
 ---
 
 <Layout title={post.data.title}>
   <div class="relative isolate bg-white text-zinc-800">
-    <div
-      style={{ "background-image": `url(../${post.data.image})` }}
-      class="absolute inset-0 left-1/3 -z-10 flex-1 bg-cover bg-right bg-no-repeat p-10 opacity-5 grayscale"
-    >
-    </div>
+    <div style={{ 'background-image': `url(../${post.data.image})` }} class="absolute inset-0 left-1/3 -z-10 flex-1 bg-cover bg-right bg-no-repeat p-10 opacity-5 grayscale"></div>
     <div class="relative p-10">
       <Breadcrumb links={links} />
       <div class="grid grid-cols-3 gap-10">

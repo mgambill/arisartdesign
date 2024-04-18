@@ -8,12 +8,21 @@ const posts = defineCollection({
   }),
 })
 
-const portfolios = defineCollection({
+const projects = defineCollection({
   // Type-check frontmatter using a schema
   schema: z.object({
     title: z.string(),
+    image: z.string(),
+  }),
+})
+
+const portfolio = defineCollection({
+  // Type-check frontmatter using a schema
+  schema: z.object({
+    title: z.string(),
+    image: z.string(),
   }),
 })
 
 
-export const collections = { posts, portfolios }
+export const collections = { posts, portfolio, projects }
