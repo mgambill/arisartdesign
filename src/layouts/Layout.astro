@@ -49,7 +49,7 @@ const isProd = process.env.NODE_ENV === 'production'
                   </a>
                 </li>
               ) : (
-                <li class={`px-10 font-serif font-medium uppercase ${isCurrent(href)}`}>
+                <li class={`p-4 sm:px-10 sm:py-0 font-serif font-medium uppercase ${isCurrent(href)}`}>
                   <a href={href}>{text}</a>
                 </li>
               )
@@ -73,10 +73,7 @@ const isProd = process.env.NODE_ENV === 'production'
           }
         </div>
         <div class="mt-8 md:order-1 md:mt-0">
-          <p class="text-center text-xs leading-5 text-gray-500">&copy; 2020 Ari's Art Designs, Inc. All rights reserved. | {isProd}</p>
-        </div>
-        <div>
-          {isProd ? '' : <a href="/keystatic">Admin</a>} | <a href="/samples">Samples</a>
+          <p class="text-center text-xs leading-5 text-gray-500">&copy; 2020 Ari's Art Designs, Inc. All rights reserved.</p>
         </div>
       </div>
     </footer>

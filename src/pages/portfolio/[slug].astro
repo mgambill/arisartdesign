@@ -18,7 +18,7 @@ export async function getStaticPaths() {
   const portfolio = await getCollection('portfolio')
   return portfolio.map((post) => ({ params: { slug: post.slug } }))
 }
-const links = [{ label: 'Portfolio', url: '/portfolio' }, { label: entry.data.title ?? 'Untitled' }]
+const links = [{ label: 'Portfolio', url: '/portfolio' }, { label: 'Untitled' }]
 ---
 
 <Layout title={entry.data.title}>
@@ -26,7 +26,7 @@ const links = [{ label: 'Portfolio', url: '/portfolio' }, { label: entry.data.ti
     <div style={{ 'background-image': `url(${entry.data.image})` }} class="absolute inset-0 left-1/3 -z-10 flex-1 bg-cover bg-right bg-no-repeat p-10 opacity-5 grayscale"></div>
     <div class="relative p-10">
       <Breadcrumb links={links} />
-      <div class="grid grid-cols-3 gap-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
         <Image src={entry.data.image} alt={entry.data.title} />
         <div class="prose col-span-2">
           <h2 class="mb-8 text-3xl font-bold">{entry.data.title}</h2>

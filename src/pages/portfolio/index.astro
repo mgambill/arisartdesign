@@ -13,7 +13,7 @@ const links = [{ label: 'Portfolio' }]
     <Breadcrumb links={links} />
 
     <h2 class="mb-8 text-3xl font-bold">Portfolio</h2>
-    <div class="grid grid-cols-3 gap-10 *:hover:fill-black/10 *:hover:opacity-50 *:hover:grayscale">
+    <div class="grid md:grid-cols-3 gap-10 *:hover:fill-black/10 *:hover:opacity-50 *:hover:grayscale">
       {
         portfolios.map((a) => (
           <a href={`/portfolio/${a.slug}`} class="group grid aspect-[1/1.2] overflow-hidden border border-gray-200 *:col-span-full *:row-span-full hover:!border-gray-400 hover:!opacity-100 hover:!grayscale-0" data-astro-prefetch>
