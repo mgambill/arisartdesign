@@ -1,0 +1,33 @@
+---
+import Breadcrumb from 'src/components/Breadcrumb.astro'
+import { getCollection } from 'astro:content'
+import Layout from '../../layouts/Layout.astro'
+
+const portfolios = await getCollection('portfolio')
+const links = [{ label: 'Gallery' }]
+---
+
+<Layout title="Keystatic & Astro's Content Collections">
+  <div class="p-10">
+    <Breadcrumb links={links} />
+
+    <h2 class="mb-8 text-3xl font-bold">Gallery</h2>
+    <div class="grid grid-cols-3 gap-10 *:hover:fill-black/10 *:hover:opacity-50 *:hover:grayscale">
+      {
+        portfolios.map((a) => (
+          <a href={`/gallery/${a.slug}`} class="group grid aspect-[1/1.2] overflow-hidden border border-gray-200 *:col-span-full *:row-span-full hover:!border-gray-400 hover:!opacity-100 hover:!grayscale-0" data-astro-prefetch>
+            <img src={`../${a.data.image}`} alt={a.data.title} class="aspect-[1/1.2] w-full object-cover transition group-hover:scale-110" />
+            <div class="z-10 self-end bg-white/70 p-2">
+              <p class="text-sm font-medium text-black">{a.data.title}</p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+    <!-- <img src={`../${portfolio.data.image}`} alt={portfolio.data.title} class="w-full aspect-square object-cover absoloute inset-0 scale-150 overflow-hidden"  />-->
+    <!-- <a href={`/gallery/${portfolio.slug}`}>grid-cols-[repeat(auto-fix,minmax(15rem,1fr))]
+      <div class="bg-orange-100 aspect-square"></div>
+      <img src={`../${portfolio.data.image}`} alt={portfolio.data.title} class="aspect-square w-full object-cover" />
+    </a> -->
+  </div>
+</Layout>

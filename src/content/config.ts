@@ -8,7 +8,7 @@ const posts = defineCollection({
   }),
 })
 
-const artworks = defineCollection({
+const portfolios = defineCollection({
   // Type-check frontmatter using a schema
   schema: z.object({
     title: z.string(),
@@ -16,4 +16,4 @@ const artworks = defineCollection({
 })
 
 
-export const collections = { posts, artworks }
+export const collections = { posts, portfolios }

@@ -16,9 +16,9 @@ export default config({
   },
   ui: {
     navigation: {
-      "Site": ['artwork', 'posts'],
-      "Pages": ['about', 'home'],
-      'Footer Links': ['socialLinks', '---', 'settings']
+      "Site": ['portfolio', 'posts', 'projects'],
+      "Pages": ['about', 'home', 'hero'],
+      'Footer Links': ['socialLinks', '---', 'settings', 'categories']
     }
   },
   singletons: {
@@ -60,6 +60,23 @@ export default config({
         }),
       },
     }),
+    hero: singleton({
+      label: 'Hero',
+      path: 'src/content/hero',
+      format: {
+        contentField: 'content'
+      },
+      schema: {
+        content: fields.document({
+          label: 'Content',
+          formatting: true,
+          images: {
+            directory: 'src/assets/images/home',
+            publicPath: '../../assets/images/home/',
+          },
+        }),
+      },
+    }),
     home: singleton({
       label: 'Home',
       path: 'src/content/pages/home',
@@ -69,6 +86,7 @@ export default config({
       schema: {
         title: fields.text({ label: 'Title' }),
         showPosts: fields.checkbox({ label: 'Show Posts' }),
+        hero: fields.document({}),
         content: fields.document({
           label: 'Content',
           formatting: true,
@@ -83,16 +101,60 @@ export default config({
     })
   },
   collections: {
-    artwork: collection({
-      label: 'Artworks',
+    categories: collection({
+      label: 'Portfolio Categories',
       slugField: 'title',
-      path: 'src/content/artwork/*',
+      path: 'src/content/portfolio-categories/*',
+      schema: {
+        title: fields.slug({ name: { label: 'Title' } }),
+        description: fields.text({ label: 'Description' }),
+        cover: fields.image({
+          label: 'Cover Image',
+          directory: 'public/images/categories',
+          publicPath: '../images/categories',
+        })
+      }
+    }),
+    projects: collection({
+      label: 'Portfolios',
+      slugField: 'title',
+      path: 'src/content/portfolio/*',
+      format: { contentField: 'content' },
+      schema: {
+        title: fields.slug({ name: { label: 'Title' } }),
+        category: fields.relationship({
+          label: 'category',
+          description: 'Portfolio category',
+          collection: 'categories'
+        }),
+        public: fields.checkbox({ label: 'Public', defaultValue: true }),
+        image: fields.image({
+          label: 'Image',
+          directory: 'public/images/portfolio',
+          publicPath: '../images/portfolio',
+        }),
+        content: fields.document({
+          label: 'Content',
+          formatting: true,
+          dividers: true,
+          links: true,
+          images: {
+            directory: 'src/assets/images/posts',
+            publicPath: '../../assets/images/posts/',
+          },
+        })
+      },
+    }),
+    portfolio: collection({
+      label: 'Portfolios',
+      slugField: 'title',
+      path: 'src/content/portfolio/*',
       format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
         category: fields.select({
           label: 'Role',
-          description: "Artwork category",
+          description: "Portfolio category",
           options: [
             { label: 'Digital Art', value: 'digital-art' },
             { label: 'Illustration', value: 'illustration' },
@@ -106,8 +168,8 @@ export default config({
         public: fields.checkbox({ label: 'Public', defaultValue: true }),
         image: fields.image({
           label: 'Image',
-          directory: 'public/images/artwork',
-          publicPath: '../images/artwork',
+          directory: 'public/images/portfolio',
+          publicPath: '../images/portfolio',
         }),
         content: fields.document({
           label: 'Content',
