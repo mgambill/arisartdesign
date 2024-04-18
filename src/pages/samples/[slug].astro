@@ -1,0 +1,37 @@
+---
+
+import { getCollection, getEntry } from 'astro:content'
+import Layout from '../../layouts/Layout.astro'
+import Breadcrumb from 'src/components/Breadcrumb.astro'
+const { slug } = Astro.params
+if (!slug) throw new Error('Slug not found')
+
+const entry = await getEntry('sample', slug)
+console.log(entry)
+
+if (!entry) throw new Error('No entry found for this slug')
+const { Content } = await entry.render()
+
+// Generate static pages
+export async function getStaticPaths() {
+  const sample = await getCollection('sample')
+  return sample.map((post) => ({ params: { slug: post.slug } }))
+}
+const links = [{ label: 'Sample', url: '/sample' }, { label: entry.data.title ?? 'Untitled' }]
+---
+
+<Layout title={entry.data.title}>
+  <div class="relative isolate bg-white text-zinc-800">
+    <div style={{ 'background-image': `url(${entry.data.image})` }} class="absolute inset-0 left-1/3 -z-10 flex-1 bg-cover bg-right bg-no-repeat p-10 opacity-5 grayscale"></div>
+    <div class="relative p-10">
+      <Breadcrumb links={links} />
+      <div class="grid grid-cols-3 gap-10">
+        <Image src={entry.data.image} alt={entry.data.title} />
+        <div class="prose col-span-2">
+          <h2 class="mb-8 text-3xl font-bold">{entry.data.title}</h2>
+          <Content />
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

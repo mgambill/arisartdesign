@@ -16,8 +16,16 @@ const portfolios = defineCollection({
 })
 const projects = defineCollection({
   // Type-check frontmatter using a schema
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
+    image: image()
+  }),
+})
+const sample = defineCollection({
+  // Type-check frontmatter using a schema
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    image: image()
   }),
 })
 

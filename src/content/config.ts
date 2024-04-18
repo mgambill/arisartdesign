@@ -10,19 +10,22 @@ const posts = defineCollection({
 
 const projects = defineCollection({
   // Type-check frontmatter using a schema
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
-    image: z.string(),
+    image: image()
+
   }),
 })
 
 const portfolio = defineCollection({
   // Type-check frontmatter using a schema
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
-    image: z.string(),
+    image: image()
+
   }),
 })
+
 
 
 export const collections = { posts, portfolio, projects }

@@ -14,13 +14,13 @@ export default config({
   cloud: {
     project: 'victoria/aris-art-design',
   },
-  // ui: {
-  //   navigation: {
-  //     "Site": ['portfolio', 'posts', 'projects'],
-  //     "Pages": ['about', 'home', 'hero'],
-  //     'Footer Links': ['socialLinks', '---', 'settings', 'categories']
-  //   }
-  // },
+  ui: {
+    navigation: {
+      "Site": ['portfolio', 'posts', 'projects', 'samples'],
+      "Pages": ['about', 'home'],
+      'Footer Links': ['socialLinks', '---', 'settings', 'categories']
+    }
+  },
   singletons: {
     socialLinks: singleton({
       label: "Social Links",
@@ -83,6 +83,21 @@ export default config({
     })
   },
   collections: {
+
+    samples: collection({
+      label: 'Samples',
+      slugField: 'title',
+      path: 'src/content/sample/*',
+      schema: {
+        title: fields.slug({ name: { label: 'Title' } }),
+        description: fields.text({ label: 'Description' }),
+        cover: fields.image({
+          label: 'Cover Image',
+          directory: 'src/assets/images/samples',
+          publicPath: '../../assets/images/samples',
+        })
+      }
+    }),
     categories: collection({
       label: 'Portfolio Categories',
       slugField: 'title',
@@ -92,8 +107,8 @@ export default config({
         description: fields.text({ label: 'Description' }),
         cover: fields.image({
           label: 'Cover Image',
-          directory: 'public/images/categories',
-          publicPath: '../images/categories',
+          directory: 'src/assets/images/categories',
+          publicPath: '../../assets/images/categories',
         })
       }
     }),
@@ -107,8 +122,8 @@ export default config({
         public: fields.checkbox({ label: 'Public', defaultValue: true }),
         image: fields.image({
           label: 'Image',
-          directory: 'public/images/projects',
-          publicPath: '/images/projects',
+          directory: 'src/assets/images/projects',
+          publicPath: '../../assets/images/projects',
         }),
         date: fields.date({
           label: 'Event date',
@@ -120,8 +135,8 @@ export default config({
           dividers: true,
           links: true,
           images: {
-            directory: 'public/images/projects',
-            publicPath: '/images/projects',
+            directory: 'src/assets/images/projects',
+            publicPath: '../../assets/images/projects',
           },
         })
       },
@@ -133,6 +148,10 @@ export default config({
       format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
+        type: fields.relationship({
+          label: 'Category',
+          collection: 'categories'
+        }),
         category: fields.select({
           label: 'Role',
           description: "Portfolio category",
@@ -149,8 +168,8 @@ export default config({
         public: fields.checkbox({ label: 'Public', defaultValue: true }),
         image: fields.image({
           label: 'Image',
-          directory: 'public/images/portfolio',
-          publicPath: '/images/portfolio',
+          directory: 'src/assets/images/portfolio',
+          publicPath: '../../assets/images/portfolio',
         }),
         content: fields.document({
           label: 'Content',
@@ -158,8 +177,8 @@ export default config({
           dividers: true,
           links: true,
           images: {
-            directory: 'public/images/portfolio',
-            publicPath: '/images/portfolio',
+            directory: 'src/assets/images/portfolio',
+            publicPath: '../../assets/images/portfolio',
           },
         })
       },
@@ -178,8 +197,8 @@ export default config({
           dividers: true,
           links: true,
           images: {
-            directory: 'src/public/images/posts',
-            publicPath: '../images/posts/',
+            directory: 'src/assets/images/posts',
+            publicPath: '../../assets/images/posts',
           },
         }),
       },

@@ -2,6 +2,7 @@
 import { getCollection, getEntry } from 'astro:content'
 import Layout from '../../layouts/Layout.astro'
 import Breadcrumb from 'src/components/Breadcrumb.astro'
+import { Image } from 'astro:assets'
 const { slug } = Astro.params
 if (!slug) throw new Error('Slug not found')
 console.log(slug)
@@ -25,7 +26,7 @@ const links = [{ label: 'Projects', url: '/projects' }, { label: 'Untitled' }]
     <div class="relative p-10">
       <Breadcrumb links={links} />
       <div class="grid grid-cols-3 gap-10">
-        <img src={post.data.image} alt={post.data.title} />
+        <Image src={post.data.image} alt={post.data.title} />
         <div class="prose col-span-2">
           <h2 class="mb-8 text-3xl font-bold">{post.data.title}</h2>
           <Content />

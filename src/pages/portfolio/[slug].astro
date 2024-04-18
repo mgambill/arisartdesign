@@ -3,11 +3,12 @@
 import { getCollection, getEntry } from 'astro:content'
 import Layout from '../../layouts/Layout.astro'
 import Breadcrumb from 'src/components/Breadcrumb.astro'
+import { Image } from 'astro:assets'
+
 const { slug } = Astro.params
 if (!slug) throw new Error('Slug not found')
 
 const entry = await getEntry('portfolio', slug)
-console.log(entry)
 
 if (!entry) throw new Error('No entry found for this slug')
 const { Content } = await entry.render()
