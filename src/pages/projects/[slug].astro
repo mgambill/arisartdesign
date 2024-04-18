@@ -1,5 +1,4 @@
 ---
-
 import { getCollection, getEntry } from 'astro:content'
 import Layout from '../../layouts/Layout.astro'
 import Breadcrumb from 'src/components/Breadcrumb.astro'
@@ -17,7 +16,7 @@ export async function getStaticPaths() {
   const projects = await getCollection('projects')
   return projects.map((post) => ({ params: { slug: post.slug } }))
 }
-const links = [{ label: 'Projects', url: '/projects' }, { label: post.data.title }]
+const links = [{ label: 'Projects', url: '/projects' }, { label: 'Untitled' }]
 ---
 
 <Layout title={post.data.title}>
