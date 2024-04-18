@@ -14,13 +14,13 @@ export default config({
   cloud: {
     project: 'victoria/aris-art-design',
   },
-  ui: {
-    navigation: {
-      "Site": ['portfolio', 'posts', 'projects'],
-      "Pages": ['about', 'home', 'hero'],
-      'Footer Links': ['socialLinks', '---', 'settings', 'categories']
-    }
-  },
+  // ui: {
+  //   navigation: {
+  //     "Site": ['portfolio', 'posts', 'projects'],
+  //     "Pages": ['about', 'home', 'hero'],
+  //     'Footer Links': ['socialLinks', '---', 'settings', 'categories']
+  //   }
+  // },
   singletons: {
     socialLinks: singleton({
       label: "Social Links",
@@ -60,23 +60,6 @@ export default config({
         }),
       },
     }),
-    hero: singleton({
-      label: 'Hero',
-      path: 'src/content/hero',
-      format: {
-        contentField: 'content'
-      },
-      schema: {
-        content: fields.document({
-          label: 'Content',
-          formatting: true,
-          images: {
-            directory: 'src/assets/images/home',
-            publicPath: '../../assets/images/home/',
-          },
-        }),
-      },
-    }),
     home: singleton({
       label: 'Home',
       path: 'src/content/pages/home',
@@ -86,7 +69,6 @@ export default config({
       schema: {
         title: fields.text({ label: 'Title' }),
         showPosts: fields.checkbox({ label: 'Show Posts' }),
-        hero: fields.document({}),
         content: fields.document({
           label: 'Content',
           formatting: true,
@@ -115,23 +97,35 @@ export default config({
         })
       }
     }),
-    projects: collection({
-      label: 'Portfolios',
+    artwork: collection({
+      label: 'Artworks',
       slugField: 'title',
-      path: 'src/content/portfolio/*',
+      path: 'src/content/artwork/*',
       format: { contentField: 'content' },
       schema: {
         title: fields.slug({ name: { label: 'Title' } }),
-        category: fields.relationship({
-          label: 'category',
-          description: 'Portfolio category',
-          collection: 'categories'
+        category: fields.select({
+          label: 'Role',
+          description: "Artwork category",
+          options: [
+            { label: 'Digital Art', value: 'digital-art' },
+            { label: 'Illustration', value: 'illustration' },
+            { label: 'Projects', value: 'projects' },
+            { label: 'Print', value: 'print' },
+            { label: 'Sketch', value: 'sketch' },
+            { label: 'Uncategorized', value: 'uncategorized' },
+          ],
+          defaultValue: 'uncategorized'
         }),
         public: fields.checkbox({ label: 'Public', defaultValue: true }),
         image: fields.image({
           label: 'Image',
-          directory: 'public/images/portfolio',
-          publicPath: '../images/portfolio',
+          directory: 'public/images/artwork',
+          publicPath: '../images/artwork',
+        }),
+        date: fields.date({
+          label: 'Event date',
+          description: 'The date of the event'
         }),
         content: fields.document({
           label: 'Content',
@@ -141,6 +135,48 @@ export default config({
           images: {
             directory: 'src/assets/images/posts',
             publicPath: '../../assets/images/posts/',
+          },
+        })
+      },
+    }),
+    project: collection({
+      label: 'Projects',
+      slugField: 'title',
+      path: 'src/content/project/*',
+      format: { contentField: 'content' },
+      schema: {
+        title: fields.slug({ name: { label: 'Title' } }),
+        category: fields.select({
+          label: 'Role',
+          description: "Artwork category",
+          options: [
+            { label: 'Digital Art', value: 'digital-art' },
+            { label: 'Illustration', value: 'illustration' },
+            { label: 'Projects', value: 'projects' },
+            { label: 'Print', value: 'print' },
+            { label: 'Sketch', value: 'sketch' },
+            { label: 'Uncategorized', value: 'uncategorized' },
+          ],
+          defaultValue: 'uncategorized'
+        }),
+        public: fields.checkbox({ label: 'Public', defaultValue: true }),
+        image: fields.image({
+          label: 'Image',
+          directory: 'public/images/project',
+          publicPath: '../images/project',
+        }),
+        date: fields.date({
+          label: 'Event date',
+          description: 'The date of the event'
+        }),
+        content: fields.document({
+          label: 'Content',
+          formatting: true,
+          dividers: true,
+          links: true,
+          images: {
+            directory: 'src/assets/images/projects',
+            publicPath: '../../assets/images/projects/',
           },
         })
       },
