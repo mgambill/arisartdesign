@@ -1,10 +1,10 @@
 ---
-import { getEntry } from "astro:content"
+import { getEntry, render } from "astro:content"
 import Layout from "../layouts/Layout.astro"
 import Breadcrumb from "src/components/Breadcrumb.astro"
 
 const aboutPage = await getEntry("pages", "about")
-const { Content } = await aboutPage.render()
+const { Content } = await render(aboutPage)
 const links = [{ label: "About" }]
 ---
 

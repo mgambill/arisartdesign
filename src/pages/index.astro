@@ -1,37 +1,58 @@
 ---
-import { getCollection } from 'astro:content'
-import { getEntry } from 'astro:content'
-import Layout from '../layouts/Layout.astro'
-import Hero from 'src/components/Hero.astro'
-const posts = await getCollection('posts')
-const portfolios = await getCollection('portfolio')
+import { getEntry, getCollection, render } from "astro:content"
+import Layout from "../layouts/Layout.astro"
+import Hero from "src/components/Hero.astro"
+import { Image } from "astro:assets"
 
-const homePage = await getEntry('pages', 'home')
-const { Content } = await homePage.render()
+const homePage = await getEntry("pages", "home")
+const categories = await getCollection("categories")
+const { Content } = await render(homePage)
+
+// .filter(a => [].contains(a.id) )
 ---
 
 <Layout title="">
   <div class="w-full">
-   <Hero />
-    <div class="w-full p-10">
-      <h2 class="mb-8 text-3xl font-bold">{homePage.data.title ?? 'About'}</h2>
+    <Hero />
+    <div class="px-20">
+
+      <div
+        class="grid gap-10 grid-cols-1 sm:grid-cols-3 py-40"
+      >
+        {
+          categories
+          .filter((a) => a.data.onHome)
+          .sort((a, b) => a.data.order - b.data.order)
+          .map((a) => (
+            <a
+              href={ a.data.type === 'project' ? `/projects` : a.data.type === 'portfolio' ? `/portfolio` : `/coming-soon`}
+
+            >
+            <div
+
+              class="group grid size-96 aspect-[1/1.2] overflow-hidden border border-gray-200 *:col-span-full *:row-span-full hover:!border-gray-400 hover:!opacity-100 hover:!grayscale-0 relative"
+              data-astro-prefetch
+            >
+              {a.data.cover ? (
+                <Image
+                src={a.data.cover}
+                alt={a.data.title}
+                class="aspect-[1/1.2] w-full object-cover transition group-hover:scale-110"
+                />
+              ) : (
+                <div class="aspect-[1/1.2] w-full bg-gray-200"></div>
+              )}
+              </div>
+              <p class="p-2 text-center font-bold text-2xl">{a.data.title}</p>
+            </a>
+          ))
+        }
+      </div>
+      <h2 class="mb-8 mt-10 text-3xl font-bold">{homePage.data.title ?? "About"}</h2>
       <div class="prose prose-zinc max-w-none dark:prose-invert">
         <Content />
       </div>
     </div>
-    {
-      homePage.data.showPosts ? (
-        <>
-          <h2>Posts</h2>
-          <ul>
-            {posts.map((post) => (
-              <li>
-                <a href={`/posts/${post.slug}`}>{post.data.title}</a>
-              </li>
-            ))}
-          </ul>
-        </>
-      ) : null
-    }
+
   </div>
 </Layout>

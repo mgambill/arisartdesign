@@ -17,3 +17,5 @@ npm run dev
 Admin UI: [http://127.0.0.1:4321/keystatic](http://127.0.0.1:4321/keystatic)
 
 Homepage: [http://localhost:4321](http://localhost:4321)
+
+Canva: https://www.canva.com/design/DAGBaBcKOPY/KxZ5pVKhy7873i9exJp_MA/edit

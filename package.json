@@ -12,23 +12,23 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@astrojs/markdoc": "^0.8.0",
-    "@astrojs/netlify": "^5.2.0",
-    "@astrojs/react": "^3.0.7",
-    "@astrojs/tailwind": "^5.1.0",
-    "@keystatic/astro": "^5.0.0",
-    "@keystatic/core": "^0.5.11",
-    "@tailwindcss/typography": "^0.5.12",
-    "@types/react": "^18.2.8",
-    "@types/react-dom": "^18.0.11",
-    "astro": "^4.0.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwindcss": "^3.4.3"
+    "@astrojs/markdoc": "^0.13.4",
+    "@astrojs/netlify": "^6.2.6",
+    "@astrojs/react": "^3.6.3",
+    "@astrojs/tailwind": "^5.1.5",
+    "@keystatic/astro": "^5.0.6",
+    "@keystatic/core": "^0.5.47",
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/react": "^18.3.20",
+    "@types/react-dom": "^18.3.6",
+    "astro": "^5.6.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
-    "eslint": "^9.0.0",
-    "prettier": "^3.2.5",
+    "eslint": "^9.24.0",
+    "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-tailwindcss": "^0.5.14"
   }

@@ -1,0 +1,6 @@
+title: Portfolio
+order: 1
+isProject: false
+onHome: true
+type: portfolio
+cover: ../../assets/images/categories/sketchbook/cover.png
