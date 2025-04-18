@@ -8,7 +8,20 @@ const links = [{ label: "Portfolio" }]
 
 const portfolio = await getCollection("portfolio")
 
-const groupedItems = Object.groupBy(portfolio, (x) => x.data.category)
+// Custom groupBy function
+function groupBy(array, keyFn) {
+  return array.reduce((result, item) => {
+    const key = keyFn(item);
+    if (!result[key]) {
+      result[key] = [];
+    }
+    result[key].push(item);
+    return result;
+  }, {});
+}
+
+
+const groupedItems = groupBy(portfolio, (x) => x.data.category)
 ---
 
 <Layout title="Portfolio">
