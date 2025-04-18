@@ -91,14 +91,13 @@ export default config({
       schema: {
         title: fields.text({ label: "Title" }),
         showPosts: fields.checkbox({ label: "Show Posts" }),
-        content: fields.document({
+        content: fields.markdoc({
           label: "Content",
-          formatting: true,
-          dividers: true,
-          links: true,
-          images: {
-            directory: "src/assets/images/home",
-            publicPath: "../../assets/images/home/",
+          options: {
+            image: {
+              directory: "src/assets/images/home",
+              publicPath: "../../assets/images/home/",
+            },
           },
         }),
       },
@@ -148,14 +147,14 @@ export default config({
         order: fields.integer({ label: "Order" }),
         description: fields.text({ label: "Description" }),
         type: fields.select({
-          label: 'Resource Type',
+          label: "Resource Type",
           description: "The person's role at the company",
           options: [
-            { label: 'Portfolio', value: 'portfolio' },
-            { label: 'Project', value: 'project' },
-            { label: 'Coming Soon', value: 'coming-soon' },
+            { label: "Portfolio", value: "portfolio" },
+            { label: "Project", value: "project" },
+            { label: "Coming Soon", value: "coming-soon" },
           ],
-          defaultValue: 'portfolio'
+          defaultValue: "portfolio",
         }),
 
         onHome: fields.checkbox({
@@ -165,6 +164,11 @@ export default config({
           label: "Cover Image",
           directory: "src/assets/images/categories",
           publicPath: "../../assets/images/categories",
+        }),
+        banner: fields.image({
+          label: "Cover Image",
+          directory: "src/assets/images/categories-banners",
+          publicPath: "../../assets/images/categories-banners",
         }),
       },
     }),

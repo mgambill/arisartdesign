@@ -1,36 +1,60 @@
 ---
-import Breadcrumb from 'src/components/Breadcrumb.astro'
-import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro'
-import { Image } from 'astro:assets'
+import Breadcrumb from "src/components/Breadcrumb.astro"
+import { getCollection } from "astro:content"
+import Layout from "../../layouts/Layout.astro"
+import { Image } from "astro:assets"
 
-const links = [{ label: 'Portfolio' }]
+const links = [{ label: "Portfolio" }]
 
-const portfolio = await getCollection('portfolio')
+const portfolio = await getCollection("portfolio")
 
-const groupedItems = Object.groupBy(portfolio, x => x.data.category)
-
+const groupedItems = Object.groupBy(portfolio, (x) => x.data.category)
 ---
 
 <Layout title="Portfolio">
+  <div class="flex flex-col">
+  <div
+  class="my-10 flex h-80 flex-col items-center justify-center gap-2 bg-[#dcc295]"
+>
+  <p class="uppercase tracking-widest">Ari's Art Design</p>
+  <h2 class="mb-8 text-8xl font-extralight font-serif ">Portfolio</h2>
+  <div class="h-px w-36 bg-black"></div>
+</div>
   <div class="p-10">
-    <Breadcrumb links={links} />
 
-    <h2 class="mb-8 text-3xl font-bold">Portfolio</h2>
-    {
-      <pre>
-        { [ 'All', ...Object.keys(groupedItems) ] }
 
-        </pre>
-    }
-    <div class="grid md:grid-cols-3 gap-10 *:hover:fill-black/10 *:hover:opacity-50 *:hover:grayscale">
+    <div class="pb-10 -ml-4 divide-x divide divide-gray-400">
+      {
+        ["All", ...Object.keys(groupedItems)].map((cat) => (
+          <a
+            href={`/portfolio/${cat}`}
+            class="py-1 px-4 hover:underline hover:text-purple-600"
+          >
+            {cat}
+          </a>
+        ))
+      }
+    </div>
+
+    <div
+      class="grid gap-10 *:hover:fill-black/10 *:hover:opacity-50 *:hover:grayscale md:grid-cols-3"
+    >
       {
         portfolio.map((a) => (
-          <a href={`/portfolio/${a.id}`} class="group grid aspect-[1/1.2] overflow-hidden border border-gray-200 *:col-span-full *:row-span-full hover:!border-gray-400 hover:!opacity-100 hover:!grayscale-0" data-astro-prefetch>
-            <Image  src={a.data.image} alt={a.data.title} class="aspect-[1/1.2] w-full object-cover transition group-hover:scale-110" />
+          <a
+            href={`/portfolio/${a.id}`}
+            class="group grid aspect-[1/1.2] overflow-hidden border border-gray-200 *:col-span-full *:row-span-full hover:!border-gray-400 hover:!opacity-100 hover:!grayscale-0"
+            data-astro-prefetch
+          >
+            <Image
+              src={a.data.image}
+              alt={a.data.title}
+              class="aspect-[1/1.2] w-full object-cover transition group-hover:scale-110"
+            />
           </a>
         ))
       }
     </div>
   </div>
+</div>
 </Layout>

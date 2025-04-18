@@ -48,9 +48,12 @@ const { Content } = await render(homePage)
           ))
         }
       </div>
-      <h2 class="mb-8 mt-10 text-3xl font-bold">{homePage.data.title ?? "About"}</h2>
-      <div class="prose prose-zinc max-w-none dark:prose-invert">
-        <Content />
+      <div>
+
+        <img src="/assets/images/nightsky.png" alt="Night Sky"/>
+        <div class="prose prose-zinc max-w-none dark:prose-invert">
+          <Content />
+        </div>
       </div>
     </div>
 

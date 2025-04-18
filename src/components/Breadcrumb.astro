@@ -11,7 +11,7 @@ const { links } = Astro.props
 
 <nav class="mb-8 sm:mb-4 flex" aria-label="Breadcrumb">
   <ol role="list" class="flex items-center space-x-4">
-    <li>
+    <!-- <li class="sr-only">
       <div>
         <a href="/" class="text-gray-400 hover:text-gray-500">
           <svg
@@ -28,11 +28,12 @@ const { links } = Astro.props
           <span class="sr-only">Home</span>
         </a>
       </div>
-    </li>
+    </li> -->
     {
       links.map((link, index) => (
         <li>
           <div class="flex items-center">
+            { index > 0 && (
             <svg
               class="h-5 w-5 flex-shrink-0 text-gray-300"
               fill="currentColor"
@@ -41,6 +42,7 @@ const { links } = Astro.props
             >
               <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
             </svg>
+            )}
             {link.url ? (
               <a
                 href={link.url}

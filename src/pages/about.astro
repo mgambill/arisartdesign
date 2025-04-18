@@ -9,11 +9,19 @@ const links = [{ label: "About" }]
 ---
 
 <Layout title="About">
-  <div class="w-full p-10">
-    <Breadcrumb links={links} />
-    <h2 class="mb-8 text-3xl font-bold">{aboutPage.data.title ?? "About"}</h2>
-    <div class="prose prose-zinc max-w-none dark:prose-invert">
-      <Content />
+  <div class="flex flex-col">
+    <!-- <Breadcrumb links={links} /> -->
+    <div
+      class="my-10 flex h-80 flex-col items-center justify-center gap-2 bg-[#dcc295]"
+    >
+      <p class="uppercase tracking-widest">Ari's Art Design</p>
+      <h2 class="mb-8 text-8xl font-extralight font-serif ">About Me</h2>
+      <div class="h-px w-36 bg-black"></div>
+    </div>
+    <div class="w-full p-10">
+      <div class="prose prose-zinc max-w-none dark:prose-invert">
+        <Content />
+      </div>
     </div>
   </div>
 </Layout>

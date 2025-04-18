@@ -91,26 +91,7 @@ const isProd = process.env.NODE_ENV === "production"
         class="container mx-auto border-t border-stone-50 bg-white shadow dark:border-stone-900 dark:bg-black"
       >
         <div class="bg-white px-20">
-          <!-- <div class="flex justify-center space-x-6 md:order-2">
-            <ul class="flex items-center justify-center text-black dark:text-zinc-500">
-              {
-                menu.map(({ href, text, logo }) =>
-                  logo ? null :
-                  href.startsWith("http") ? (
-                    <li class={`p-4 sm:px-10 sm:py-0 ${isCurrent(href)}`}>
-                      <a href={href} target="_blank">{text}</a>
-                    </li>
-                  ) :
-                  (
-                    <li class={`p-4 sm:px-10 sm:py-0 ${isCurrent(href)}`}>
-                      <a href={href}>{text}</a>
-                    </li>
-                  )
-                )
-              }
-            </ul>
-          </div> -->
-
+     
           <div
             class="pt-8 lg:flex lg:items-center lg:justify-between"
           >

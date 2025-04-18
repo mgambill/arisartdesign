@@ -26,12 +26,22 @@ const links = [{ label: 'portfolio', url: '/portfolio' }, { label: 'Untitled' }]
     <div class="relative p-10">
       <Breadcrumb links={[ { label: 'Portfolio', url: '/portfolio' }, { label: entry.data.title ?? 'Untitled' } ]} />
       <div class="gap-10">
-        <h2 class="mb-8 text-3xl font-bold">{entry.data.title}</h2>
-        {entry.data.image ? (
+
+        <!-- <div
+        class="my-10 flex h-80 flex-col items-center justify-center gap-2 bg-[#dcc295]"
+      >
+        <p class="uppercase tracking-widest">Ari's Art Design</p>
+        <h2 class="mb-8 px-4 text-6xl font-extralight font-serif ">{entry.data.title}</h2>
+        <div class="h-[2px] w-36 bg-black"></div>
+      </div> -->
+
+
+      {entry.data.image ? (
           <Image src={entry.data.image} alt={entry.data.title} />
         ) : (
           <p>No image available</p>
-        )}
+          // <h2 class="py-8 px-4 text-6xl font-extralight font-serif ">{entry.data.title}</h2>
+         )}
         <div class="prose">
           <Content />
         </div>
