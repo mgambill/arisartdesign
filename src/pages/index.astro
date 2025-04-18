@@ -48,10 +48,10 @@ const { Content } = await render(homePage)
           ))
         }
       </div>
-      <div>
-
-        <img src="/assets/images/nightsky.png" alt="Night Sky"/>
-        <div class="prose prose-zinc max-w-none dark:prose-invert">
+      <div class="relative">
+        <div class="w-1/2 bg-[url('/images/nightsky.jpg')] bg-cover bg-center bg-no-repeat h-96 mb-10">
+        </div>
+        <div class="prose prose-zinc max-w-none dark:prose-invert absolute -top-8 left-1/2 -translate-x-8 p-10 bg-[#dcc295] backdrop-blur-md">
           <Content />
         </div>
       </div>
