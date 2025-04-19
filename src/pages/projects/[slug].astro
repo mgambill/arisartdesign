@@ -15,9 +15,9 @@ const { Content } = await render(entry)
 // Generate static pages
 export async function getStaticPaths() {
   const projects = await getCollection('projects')
-  return projects.map((post) => ({ params: { slug: post.slug } }))
+  return projects.map((item) => ({ params: { slug: item.id } }))
 }
-const links = [{ label: 'Projects', url: '/projects' }, { label: 'Untitled' }]
+
 ---
 
 <Layout title={entry.data.title}>
