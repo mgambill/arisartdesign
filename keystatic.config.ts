@@ -115,8 +115,8 @@ export default config({
           options: {
             divider: true,
             image: {
-              directory: "src/assets/images/about",
-              publicPath: "../../assets/images/about/",
+              directory: "src/assets/images/coming-soon",
+              publicPath: "../../assets/images/coming-soon/",
             },
           },
         }),
