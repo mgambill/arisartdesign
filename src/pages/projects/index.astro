@@ -1,5 +1,5 @@
 ---
-import Breadcrumb from '/src/components/Breadcrumb.astro'
+import Banner from '/src/components/Banner.astro'
 import { getCollection } from 'astro:content'
 import Layout from '../../layouts/Layout.astro'
 import { Image } from 'astro:assets'
@@ -9,12 +9,10 @@ const links = [{ label: 'Projects' }]
 ---
 
 <Layout title="Projects">
-  <div class="p-10">
-    <Breadcrumb links={links} />
-    <div class="h-40 flex items-center bg-[image('/hero.jpeg')] bg-cover bg-center bg-no-repeat">
-      <h2 class="text-3xl font-bold">Projects</h2>
 
-    </div>
+  <div class="flex flex-col">
+    <Banner label="Projects" />
+  <div class="p-10">
     <div class="grid md:grid-cols-3 gap-10 *:hover:fill-black/10 *:hover:opacity-50 *:hover:grayscale">
       {
         projects.map((a) => (
@@ -27,5 +25,6 @@ const links = [{ label: 'Projects' }]
         ))
       }
     </div>
+  </div>
   </div>
 </Layout>

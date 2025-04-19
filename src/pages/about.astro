@@ -1,7 +1,7 @@
 ---
 import { getEntry, render } from "astro:content"
 import Layout from "../layouts/Layout.astro"
-import Breadcrumb from "src/components/Breadcrumb.astro"
+import Banner from "src/components/Banner.astro"
 
 const aboutPage = await getEntry("pages", "about")
 const { Content } = await render(aboutPage)
@@ -11,13 +11,7 @@ const links = [{ label: "About" }]
 <Layout title="About">
   <div class="flex flex-col">
     <!-- <Breadcrumb links={links} /> -->
-    <div
-      class="my-10 flex h-80 flex-col items-center justify-center gap-2 bg-[#dcc295]"
-    >
-      <p class="uppercase tracking-widest">Ari's Art Design</p>
-      <h2 class="mb-8 text-8xl font-extralight font-serif ">About Me</h2>
-      <div class="h-px w-36 bg-black"></div>
-    </div>
+    <Banner label="About Me" />
     <div class="w-full p-10">
       <div class="prose prose-zinc max-w-none dark:prose-invert">
         <Content />

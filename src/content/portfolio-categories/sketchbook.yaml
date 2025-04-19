@@ -1,6 +1,5 @@
 title: Portfolio
 order: 1
-isProject: false
-onHome: true
 type: portfolio
+isHome: true
 cover: ../../assets/images/categories/sketchbook/cover.png

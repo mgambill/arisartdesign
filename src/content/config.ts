@@ -39,12 +39,19 @@ const portfolio = defineCollection({
 })
 
 const categories = defineCollection({
-  loader: glob({ pattern: ['*.yaml'], base: 'src/content/portfolio-categories' }),
+  loader: glob({ pattern: ['*.yaml'], base: 'src/content/categories' }),
+//   // Type-check frontmatter using a schema
+   schema: z.object({
+    label:  z.string(),
+    order: z.number().optional(),
+   }),
+})
+const sections = defineCollection({
+  loader: glob({ pattern: ['*.yaml'], base: 'src/content/sections' }),
 //   // Type-check frontmatter using a schema
    schema: ({ image }) => z.object({
      title: z.string(),
      cover: image().optional(),
-     onHome: z.boolean().optional(),
      type: z.enum([
       'portfolio',
       'project',
@@ -57,4 +64,4 @@ const categories = defineCollection({
 
 
 
-export const collections = { posts, portfolio, projects, categories, pages }
+export const collections = { posts, portfolio, projects, categories, pages, sections }

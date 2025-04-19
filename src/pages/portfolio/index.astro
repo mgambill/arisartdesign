@@ -1,73 +1,84 @@
 ---
-import Breadcrumb from "src/components/Breadcrumb.astro"
+import Banner from "src/components/Banner.astro"
 import { getCollection } from "astro:content"
 import Layout from "../../layouts/Layout.astro"
 import { Image } from "astro:assets"
 
 const links = [{ label: "Portfolio" }]
-
+const filter = Astro.url.searchParams.get("filter") || ""
 const portfolio = await getCollection("portfolio")
+const categories = await getCollection("categories")
 
 // Custom groupBy function
 function groupBy(array, keyFn) {
   return array.reduce((result, item) => {
-    const key = keyFn(item);
+    const key = keyFn(item)
     if (!result[key]) {
-      result[key] = [];
+      result[key] = []
     }
-    result[key].push(item);
-    return result;
-  }, {});
+    result[key].push(item)
+    return result
+  }, {})
 }
 
-
 const groupedItems = groupBy(portfolio, (x) => x.data.category)
+
+// Filter groupedItems based on the filter variable
+const filteredItems =
+  filter && filter.toLowerCase() !== "all" ? groupedItems[filter] : portfolio
+
+const resolveCategory = (cat: string) => categories.find((c) => c.id === cat)
+const allCategory = { id: "", data: { label: "All" }, count: portfolio.length  }
 ---
 
 <Layout title="Portfolio">
   <div class="flex flex-col">
-  <div
-  class="my-10 flex h-80 flex-col items-center justify-center gap-2 bg-[#dcc295]"
->
-  <p class="uppercase tracking-widest">Ari's Art Design</p>
-  <h2 class="mb-8 text-8xl font-extralight font-serif ">Portfolio</h2>
-  <div class="h-px w-36 bg-black"></div>
-</div>
-  <div class="p-10">
+    <Banner label="Portfolio" />
+    <div class="p-10">
+      <div class="pb-10">
+        {
+          [allCategory, ...categories]
 
+            .map((cat, i) => (
+              <>
+                <> {i > 0 && <span class="mx-1">|</span>}</>
+                <a
+                  href={`/portfolio/?filter=${cat.id}`}
+                  class:list={[
+                    "mx-1 rounded px-4 py-1.5 ",
+                    filter === cat.id
+                      ? "bg-blue-500 text-white"
+                      : "hover:bg-blue-100 hover:text-blue-700 ",
+                  ]}
+                >
+                  {cat.data?.label}
+                  ({ cat.count ?? groupedItems[cat.id]?.length ?? 0 })
+                </a>
+              </>
+            ))
+        }
+      </div>
 
-    <div class="pb-10 -ml-4 divide-x divide divide-gray-400">
-      {
-        ["All", ...Object.keys(groupedItems)].map((cat) => (
-          <a
-            href={`/portfolio/${cat}`}
-            class="py-1 px-4 hover:underline hover:text-purple-600"
-          >
-            {cat}
-          </a>
-        ))
-      }
-    </div>
-
-    <div
-      class="grid gap-10 *:hover:fill-black/10 *:hover:opacity-50 *:hover:grayscale md:grid-cols-3"
-    >
-      {
-        portfolio.map((a) => (
-          <a
-            href={`/portfolio/${a.id}`}
-            class="group grid aspect-[1/1.2] overflow-hidden border border-gray-200 *:col-span-full *:row-span-full hover:!border-gray-400 hover:!opacity-100 hover:!grayscale-0"
-            data-astro-prefetch
-          >
-            <Image
-              src={a.data.image}
-              alt={a.data.title}
-              class="aspect-[1/1.2] w-full object-cover transition group-hover:scale-110"
-            />
-          </a>
-        ))
-      }
+      <div
+        class="grid gap-10 *:hover:fill-black/10 *:hover:opacity-50 *:hover:grayscale md:grid-cols-3"
+      >
+        {
+          filteredItems &&
+            filteredItems.map((a) => (
+              <a
+                href={`/portfolio/${a.id}`}
+                class="group grid aspect-[1/1.2] overflow-hidden border border-gray-200 *:col-span-full *:row-span-full hover:!border-gray-400 hover:!opacity-100 hover:!grayscale-0"
+                data-astro-prefetch
+              >
+                <Image
+                  src={a.data.image}
+                  alt={a.data.title}
+                  class="aspect-[1/1.2] w-full object-cover transition group-hover:scale-110"
+                />
+              </a>
+            ))
+        }
+      </div>
     </div>
   </div>
-</div>
 </Layout>

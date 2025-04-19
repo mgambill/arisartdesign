@@ -26,7 +26,7 @@ export default config({
     navigation: {
       Site: ["portfolio", "posts", "projects", "samples"],
       Pages: ["about", "home", "coming"],
-      "Footer Links": ["socialLinks", "---", "settings", "categories"],
+      "Footer Links": ["socialLinks", "---", "settings", "categories","sections"],
     },
   },
   singletons: {
@@ -140,15 +140,23 @@ export default config({
     }),
     categories: collection({
       label: "Portfolio Categories",
+      slugField: "label",
+      path: "src/content/categories/*",
+      schema: {
+        label: fields.slug({ name: { label: "Label" } }),
+        order: fields.integer({ label: "Order" })
+      },
+    }),
+    sections: collection({
+      label: "Homepage Sections",
       slugField: "title",
-      path: "src/content/portfolio-categories/*",
+      path: "src/content/sections/*",
       schema: {
         title: fields.slug({ name: { label: "Title" } }),
         order: fields.integer({ label: "Order" }),
-        description: fields.text({ label: "Description" }),
+
         type: fields.select({
-          label: "Resource Type",
-          description: "The person's role at the company",
+          label: "Destination",
           options: [
             { label: "Portfolio", value: "portfolio" },
             { label: "Project", value: "project" },
@@ -157,19 +165,11 @@ export default config({
           defaultValue: "portfolio",
         }),
 
-        onHome: fields.checkbox({
-          label: "Show on Home Page",
-        }),
         cover: fields.image({
           label: "Cover Image",
-          directory: "src/assets/images/categories",
-          publicPath: "../../assets/images/categories",
-        }),
-        banner: fields.image({
-          label: "Cover Image",
-          directory: "src/assets/images/categories-banners",
-          publicPath: "../../assets/images/categories-banners",
-        }),
+          directory: "src/assets/images/sections",
+          publicPath: "../../assets/images/sections",
+        })
       },
     }),
     projects: collection({
@@ -208,23 +208,23 @@ export default config({
       format: { contentField: "content" },
       schema: {
         title: fields.slug({ name: { label: "Title" } }),
-        type: fields.relationship({
+        category: fields.relationship({
           label: "Category",
           collection: "categories",
         }),
-        category: fields.select({
-          label: "Role",
-          description: "Portfolio category",
-          options: [
-            { label: "Digital Art", value: "digital-art" },
-            { label: "Illustration", value: "illustration" },
-            { label: "Painting", value: "painting" },
-            { label: "Print", value: "print" },
-            { label: "Sketch", value: "sketch" },
-            { label: "Uncategorized", value: "uncategorized" },
-          ],
-          defaultValue: "uncategorized",
-        }),
+        // category: fields.select({
+        //   label: "Role",
+        //   description: "Portfolio category",
+        //   options: [
+        //     { label: "Digital Art", value: "digital-art" },
+        //     { label: "Illustration", value: "illustration" },
+        //     { label: "Painting", value: "painting" },
+        //     { label: "Print", value: "print" },
+        //     { label: "Sketch", value: "sketch" },
+        //     { label: "Uncategorized", value: "uncategorized" },
+        //   ],
+        //   defaultValue: "uncategorized",
+        // }),
         public: fields.checkbox({ label: "Public", defaultValue: true }),
         image: fields.image({
           label: "Image",

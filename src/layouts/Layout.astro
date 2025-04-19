@@ -53,31 +53,28 @@ const isProd = process.env.NODE_ENV === "production"
         class="container mx-auto border-b border-stone-50 bg-white shadow dark:border-stone-900 dark:bg-black"
       >
         <ul
-          class="flex items-center justify-center text-black dark:text-zinc-500"
+          class="flex sm:grid sm:grid-cols-[1fr_1fr_8rem_1fr_1fr] items-center justify-center text-black dark:text-zinc-500 h-20"
         >
           {
             menu.map(({ href, text, logo }) =>
               logo ? (
-                <li class="px-10">
+                <li class="shrink-0 p-2 max-w-32">
                   <a href="/">
-                    <img src="/logo.png" alt="Logo" class="w-48 dark:invert" />
-                  </a>
-                </li>
-              ) : href.startsWith("http") ? (
-                <li
-                  class={`p-4 font-serif font-medium uppercase sm:px-10 sm:py-0 ${isCurrent(href)}`}
-                >
-                  <a href={href} target="_blank">
-                    {text}
+                    <img src="/logo.png" alt="Logo" class="dark:invert" />
                   </a>
                 </li>
               ) : (
                 <li
-                  class={`p-4 font-serif font-medium uppercase sm:px-10 sm:py-0 ${isCurrent(href)}`}
+                  class={`font-serif font-medium uppercase text-center sm:py-0 ${isCurrent(href)} hidden sm:block`}
                 >
-                  <a href={href}>{text}</a>
-                </li>
-              ),
+                   { href && href.startsWith("http") ? (
+
+                     <a href={href} target="_blank" class="hover:bg-blue-100 dark:hover:text-zinc-100 p-2">
+                    {text}
+                  </a>) :(
+                    <a href={href} class="hover:bg-blue-100 dark:hover:text-zinc-100 p-2">{text}</a>
+                    ) }
+                </li>              )
             )
           }
         </ul>
@@ -91,7 +88,7 @@ const isProd = process.env.NODE_ENV === "production"
         class="container mx-auto border-t border-stone-50 bg-white shadow dark:border-stone-900 dark:bg-black"
       >
         <div class="bg-white px-20">
-     
+
           <div
             class="pt-8 lg:flex lg:items-center lg:justify-between"
           >

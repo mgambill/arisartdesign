@@ -5,7 +5,7 @@ import Hero from "src/components/Hero.astro"
 import { Image } from "astro:assets"
 
 const homePage = await getEntry("pages", "home")
-const categories = await getCollection("categories")
+const sections = await getCollection("sections")
 const { Content } = await render(homePage)
 
 // .filter(a => [].contains(a.id) )
@@ -14,14 +14,13 @@ const { Content } = await render(homePage)
 <Layout title="">
   <div class="w-full">
     <Hero />
-    <div class="px-20">
+    <div class="sm:px-20 md:px-0">
 
       <div
-        class="grid gap-10 grid-cols-1 sm:grid-cols-3 py-40"
+        class="grid gap-10 grid-cols-1 sm:px-10 sm:grid-cols-2 lg:grid-cols-3 py-40"
       >
         {
-          categories
-          .filter((a) => a.data.onHome)
+          sections
           .sort((a, b) => a.data.order - b.data.order)
           .map((a) => (
             <a
@@ -30,7 +29,7 @@ const { Content } = await render(homePage)
             >
             <div
 
-              class="group grid size-96 aspect-[1/1.2] overflow-hidden border border-gray-200 *:col-span-full *:row-span-full hover:!border-gray-400 hover:!opacity-100 hover:!grayscale-0 relative"
+              class="group grid xl:size-96 aspect-[1/1.2] overflow-hidden border border-gray-200 *:col-span-full *:row-span-full hover:!border-gray-400 hover:!opacity-100 hover:!grayscale-0 relative"
               data-astro-prefetch
             >
               {a.data.cover ? (
@@ -49,9 +48,9 @@ const { Content } = await render(homePage)
         }
       </div>
       <div class="relative">
-        <div class="w-1/2 bg-[url('/images/nightsky.jpg')] bg-cover bg-center bg-no-repeat h-96 mb-10">
+        <div class="lg:w-1/2 bg-[url('/images/nightsky.jpg')] bg-cover bg-center bg-no-repeat h-96 mb-10">
         </div>
-        <div class="prose prose-zinc max-w-none dark:prose-invert absolute -top-8 left-1/2 -translate-x-8 p-10 bg-[#dcc295] backdrop-blur-md">
+        <div class="prose prose-zinc max-w-none dark:prose-invert lg:absolute -top-8 left-1/2 lg:-translate-x-8 p-10 bg-[#dcc295] backdrop-blur-md">
           <Content />
         </div>
       </div>
