@@ -1,7 +1,10 @@
-import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react"
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from "@headlessui/react"
 
 export default function Header() {
-
   const pathname =
     typeof window !== "undefined" ? window.location.pathname : "/"
 
@@ -32,7 +35,7 @@ export default function Header() {
                 data-slot="icon"
               >
                 <path
-                 strokeLinecap="round"
+                  strokeLinecap="round"
                   strokeLinejoin="round"
                   d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                 />
@@ -48,7 +51,7 @@ export default function Header() {
                 data-slot="icon"
               >
                 <path
-                 strokeLinecap="round"
+                  strokeLinecap="round"
                   strokeLinejoin="round"
                   d="M6 18 18 6M6 6l12 12"
                 />
@@ -58,13 +61,17 @@ export default function Header() {
 
           <div className="flex flex-1 items-center justify-center sm:items-stretch">
             <a className="sm:hidden" href="/">
-              <img src="/logo.png" alt="Logo" className="dark:invert h-24" />
+              <img src="/logo.png" alt="Logo" className="h-24 dark:invert" />
             </a>
-            <div className="hidden sm:ml-6 sm:flex sm:space-x-8 items-center">
+            <div className="hidden items-center sm:ml-6 sm:flex sm:space-x-8">
               {menu.map((item) =>
                 item.logo ? (
-                  <a key='logo' href="/">
-                    <img src="/logo.png" alt="Logo" className="dark:invert h-24" />
+                  <a key="logo" href="/">
+                    <img
+                      src="/logo.png"
+                      alt="Logo"
+                      className="h-24 dark:invert"
+                    />
                   </a>
                 ) : (
                   <a
@@ -72,7 +79,7 @@ export default function Header() {
                     href={item.href}
                     className={
                       pathname === item.href
-                        ? "border-indigo-500 font-serif text-gray-900"
+                        ? "border-indigo-500 font-serif text-blue-500 font-medium"
                         : "border-transparent font-serif text-gray-500 hover:border-gray-300 hover:text-gray-700"
                     }
                   >
@@ -82,29 +89,30 @@ export default function Header() {
               )}
             </div>
           </div>
-
         </div>
       </div>
 
       <DisclosurePanel className="lg:hidden">
         <div className="space-y-1 pb-4 pt-2">
-          { [ { text:'Home', href: '/'},...menu ].filter(item => !item.logo).map((item) =>
-                  <DisclosureButton
-            as="a"
-                    key={item.href}
-                    href={item.href}
-                    className={
-                      `
+          {[{ text: "Home", href: "/" }, ...menu]
+            .filter((item) => !item.logo)
+            .map((item) => (
+              <DisclosureButton
+                as="a"
+                key={item.href}
+                href={item.href}
+                className={`
                       block border-l-4 py-2 pl-3 pr-4 text-base font-medium
-                      ${pathname === item.href
-                        ? "bg-indigo-50 border-indigo-500 text-indigo-700"
-                        : "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700"}
+                      ${
+                        pathname === item.href
+                          ? "border-indigo-500 bg-indigo-50 text-blue-500"
+                          : "border-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
+                      }
                     `}
-                  >
-                    {item.text}
-                  </DisclosureButton>
-
-              )}
+              >
+                {item.text}
+              </DisclosureButton>
+            ))}
         </div>
       </DisclosurePanel>
     </Disclosure>
