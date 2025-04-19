@@ -1,11 +1,7 @@
 ---
-import { getEntry, render } from "astro:content"
 import Layout from "../layouts/Layout.astro"
 import { Image } from "astro:assets"
 import AboutMe from "/src/assets/images/coming-soon/Me Again.jpg"
-// const aboutPage = await getEntry("pages", "coming-soon")
-// const { Content } = await render(aboutPage)
-// const links = [{ label: "Coming Soon" }]
 ---
 
 <Layout title="About">
@@ -13,10 +9,5 @@ import AboutMe from "/src/assets/images/coming-soon/Me Again.jpg"
     <Image src={AboutMe} alt="Coming Soon" width={500} height={500} class="mx-auto py-10" />
     <h3 class="font-serif text-4xl">Coming Soon</h3>
     <p>Please check back soon!</p>
-    <!--
-    <div class="prose prose-zinc max-w-none dark:prose-invert">
-      <Content />
-    </div>
-    -->
   </div>
 </Layout>
