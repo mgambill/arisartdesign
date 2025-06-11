@@ -1,64 +1,254 @@
 ---
-
+import Layout from "../layouts/Layout.astro"
 ---
 
-<form class="md:col-span-2">
-  <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
-    <div class="col-span-full flex items-center gap-x-8">
-      <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-24 flex-none rounded-lg bg-gray-800 object-cover">
-      <div>
-        <button type="button" class="rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-white/20">Change avatar</button>
-        <p class="mt-2 text-xs/5 text-gray-400">JPG, GIF or PNG. 1MB max.</p>
-      </div>
-    </div>
+<Layout title="Commission Request">
+  <!-- Main content -->
+  <div class="flex-1 xl:overflow-y-auto">
+    <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
+      <h1 class="text-3xl font-bold tracking-tight text-slate-900 text-center">Artwork Commission Request</h1>
 
-    <div class="sm:col-span-3">
-      <label for="first-name" class="block text-sm/6 font-medium text-white">First name</label>
-      <div class="mt-2">
-        <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6">
-      </div>
-    </div>
+      <form
+        class="mt-6 divide-y divide-slate-200"
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        class="needs-validation"
+        data-astro-reload
+        novalidate
+      >
+        <!-- Add your Web3Forms Access Key -->
+        <input type="hidden" name="access_key" value="59a0690a-6cdf-473e-ad2b-ebaf1da3cc2b" />
 
-    <div class="sm:col-span-3">
-      <label for="last-name" class="block text-sm/6 font-medium text-white">Last name</label>
-      <div class="mt-2">
-        <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6">
-      </div>
-    </div>
+        <!-- ✅ Correct. Full URL with https:// -->
+<input type="hidden" name="redirect" value="https://arisartdesign.com/commission-thanks">
 
-    <div class="col-span-full">
-      <label for="email" class="block text-sm/6 font-medium text-white">Email address</label>
-      <div class="mt-2">
-        <input id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6">
-      </div>
-    </div>
+        <input type="checkbox" class="hidden" style="display:none" name="botcheck" />
 
-    <div class="col-span-full">
-      <label for="username" class="block text-sm/6 font-medium text-white">Username</label>
-      <div class="mt-2">
-        <div class="flex items-center rounded-md bg-white/5 pl-3 outline outline-1 -outline-offset-1 outline-white/10 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-500">
-          <div class="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">example.com/</div>
-          <input type="text" name="username" id="username" class="block min-w-0 grow bg-transparent py-1.5 pl-1 pr-3 text-base text-white placeholder:text-gray-500 focus:outline focus:outline-0 sm:text-sm/6" placeholder="janesmith">
+        <article class="grid grid-cols-1 gap-y-6 py-8 sm:grid-cols-6 sm:gap-x-6">
+          <div class="sm:col-span-6">
+            <h2 class="text-xl font-medium text-slate-900">Contact Information</h2>
+          </div>
+
+          <div class="sm:col-span-3">
+            <label for="first-name" class="block text-sm/6 font-medium text-slate-900">First name</label>
+            <input
+              type="text"
+              name="first-name"
+              id="first-name"
+              autocomplete="given-name"
+              class="mt-2 block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500 sm:text-sm/6"
+            />
+          </div>
+
+          <div class="sm:col-span-3">
+            <label for="last-name" class="block text-sm/6 font-medium text-slate-900">Last name</label>
+            <input
+              type="text"
+              name="last-name"
+              id="last-name"
+              autocomplete="family-name"
+              class="mt-2 block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500 sm:text-sm/6"
+            />
+          </div>
+
+          <div class="sm:col-span-3">
+            <label for="email-address" class="block text-sm/6 font-medium text-slate-900">Email address</label>
+            <input
+              type="text"
+              name="email-address"
+              id="email-address"
+              autocomplete="email"
+              class="mt-2 block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500 sm:text-sm/6"
+            />
+          </div>
+
+          <div class="sm:col-span-3">
+            <label for="phone-number" class="block text-sm/6 font-medium text-slate-900">Phone number</label>
+            <input
+              type="text"
+              name="phone-number"
+              id="phone-number"
+              autocomplete="tel"
+              class="mt-2 block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500 sm:text-sm/6"
+            />
+          </div>
+        </article>
+
+        <article class="grid grid-cols-1 gap-y-6 py-8 sm:grid-cols-6 sm:gap-x-6">
+          <div class="sm:col-span-6">
+            <h2 class="text-xl font-medium text-slate-900">Additional Information</h2>
+          </div>
+
+          <div class="sm:col-span-6">
+            <label for="description" class="block text-sm/6 font-medium text-slate-900">Specific Request</label>
+            <div class="mt-2">
+              <textarea
+                id="description"
+                name="description"
+                rows="4"
+                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500 sm:text-sm/6"
+              ></textarea>
+            </div>
+            <p class="mt-3 text-sm text-slate-500">Brief description for your request.</p>
+          </div>
+
+          <div class="sm:col-span-3">
+            <label for="style" class="block text-sm/6 font-medium text-slate-900">Style Preference</label>
+            <div class="mt-2 grid grid-cols-1">
+              <select
+                id="style"
+                name="style"
+                class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500 sm:text-sm/6"
+              >
+                <option></option>
+                <option>Realistic</option>
+                <option>Cartoon</option>
+                <option>Other</option>
+              </select>
+              <svg
+                class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-600 sm:size-4"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+          </div>
+
+          <div class="sm:col-span-3">
+            <label for="deadline" class="block text-sm/6 font-medium text-slate-900">Deadline</label>
+            <input
+              type="date"
+              name="deadline"
+              id="deadline"
+              class="mt-2 block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500 sm:text-sm/6"
+            />
+          </div>
+
+          <!-- Upload sample -->
+        </article>
+
+        <article class="grid grid-cols-1 gap-y-6 py-8 sm:grid-cols-6 sm:gap-x-6">
+          <div class="sm:col-span-6">
+            <h2 class="text-xl font-medium text-slate-900">Agreement Terms</h2>
+          </div>
+
+          <div class="col-span-6">
+            <p class="block text-sm/6 font-medium text-slate-900">By submitting this form, you agree to the following terms:</p>
+
+            <ul class="ml-4 list-inside list-disc text-sm/6">
+              <li>A non-refundable deposit of 50% is required upfront to secure the commission.</li>
+              <li>The artist will provide up to 3 initial sketches/concepts for approval before proceeding with the final artwork.</li>
+              <li>Any major changes requested after approval may incur additional charges.</li>
+              <li>The final payment is due upon completion and before the delivery of the artwork.</li>
+              <li>The artist retains the right to showcase the commissioned artwork in their portfolio or promotional materials.</li>
+            </ul>
+          </div>
+          <div class="col-span-full flex gap-3">
+            <div class="flex h-6 shrink-0 items-center">
+              <div class="group grid size-4 grid-cols-1">
+                <input
+                  id="terms-agreement"
+                  aria-describedby="terms-agreement-description"
+                  name="terms-agreement"
+                  type="checkbox"
+                  class="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-blue-600 checked:bg-blue-600 indeterminate:border-blue-600 indeterminate:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
+                />
+                <svg
+                  class="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                >
+                  <path class="opacity-0 group-has-[:checked]:opacity-100" d="M3 8L6 11L11 3.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  ></path>
+                  <path class="opacity-0 group-has-[:indeterminate]:opacity-100" d="M3 7H11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <div class="text-sm/6">
+              <label for="terms-agreement" class="text-gray-900">I agree to the terms listed above.</label>
+            </div>
+          </div>
+        </article>
+
+        <div class="flex justify-end gap-x-3 pt-8">
+          <button
+            type="button"
+            class="rounded-md bg-white px-3 py-2 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 hover:bg-slate-50"
+            >Cancel</button
+          >
+          <button
+            type="submit"
+            class="inline-flex justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            >Submit</button
+          >
         </div>
-      </div>
-    </div>
-
-    <div class="col-span-full">
-      <label for="timezone" class="block text-sm/6 font-medium text-white">Timezone</label>
-      <div class="mt-2 grid grid-cols-1">
-        <select id="timezone" name="timezone" class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white/5 py-1.5 pl-3 pr-8 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 *:bg-gray-800 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6">
-          <option>Realistic</option>
-          <option>Cartoon</option>
-          <option>Other</option>
-        </select>
-        <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-400 sm:size-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon">
-          <path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-        </svg>
-      </div>
+      </form>
     </div>
   </div>
+</Layout>
 
-  <div class="mt-8 flex">
-    <button type="submit" class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Save</button>
-  </div>
-</form>
+
+<script is:inline>
+
+  // use astro:page-load event if you are using View Transitions
+
+  document.addEventListener("DOMContentLoaded", () => {
+
+      const form = document.getElementById("form");
+      const result = document.getElementById("result");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        form.classList.add("was-validated");
+        if (!form.checkValidity()) {
+          form.querySelectorAll(":invalid")[0].focus();
+          return;
+        }
+        const formData = new FormData(form);
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+
+        result.innerHTML = "Sending...";
+
+        fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: json,
+        })
+          .then(async (response) => {
+            let json = await response.json();
+            if (response.status == 200) {
+              result.classList.add("text-green-500");
+              result.innerHTML = json.message;
+            } else {
+              console.log(response);
+              result.classList.add("text-red-500");
+              result.innerHTML = json.message;
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            result.innerHTML = "Something went wrong!";
+          })
+          .then(function () {
+            form.reset();
+            form.classList.remove("was-validated");
+            setTimeout(() => {
+              result.style.display = "none";
+            }, 5000);
+          });
+      });
+    },
+    { once: true },
+  );
+</script>

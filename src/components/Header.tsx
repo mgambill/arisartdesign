@@ -9,9 +9,11 @@ export default function Header() {
     typeof window !== "undefined" ? window.location.pathname : "/"
 
   const menu = [
-    { href: "/portfolio", text: "Portfolio" },
     { href: "/about", text: "About Me" },
+    { href: "/commission", text: "Commission" },
+    { href: "/contact", text: "Contact" },
     { logo: true },
+    { href: "/portfolio", text: "Portfolio" },
     { href: "/coming-soon", text: "Shop" },
     { href: "/projects", text: "Projects" },
   ]

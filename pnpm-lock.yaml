@@ -38,6 +38,9 @@ dependencies:
   astro:
     specifier: ^5.6.2
     version: 5.6.2(typescript@5.8.3)
+  canvas-confetti:
+    specifier: ^1.9.3
+    version: 1.9.3
   react:
     specifier: ^18.3.1
     version: 18.3.1
@@ -4110,6 +4113,10 @@ packages:
 
   /caniuse-lite@1.0.30001713:
     resolution: {integrity: sha512-wCIWIg+A4Xr7NfhTuHdX+/FKh3+Op3LBbSp2N5Pfx6T/LhdQy3GTyoTg48BReaW/MyMNZAkTadsBtai3ldWK0Q==}
+    dev: false
+
+  /canvas-confetti@1.9.3:
+    resolution: {integrity: sha512-rFfTURMvmVEX1gyXFgn5QMn81bYk70qa0HLzcIOSVEyl57n6o9ItHeBtUSWdvKAPY0xlvBHno4/v3QPrT83q9g==}
     dev: false
 
   /ccount@2.0.1:

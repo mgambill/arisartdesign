@@ -1,0 +1,109 @@
+<!-- // Styling Requires Tailwind CSS -->
+<form
+  action="https://api.web3forms.com/submit"
+  method="POST"
+  id="form"
+
+  data-astro-reload
+  novalidate
+  class=" mt-6 sm:flex sm:max-w-md lg:mt-0"
+>
+  <!-- Add your Web3Forms Access Key -->
+  <input type="hidden" name="access_key" value="59a0690a-6cdf-473e-ad2b-ebaf1da3cc2b" />
+  <input type="checkbox" class="hidden" style="display:none" name="botcheck" />
+  <label for="email-address" class="sr-only">Email address</label>
+  <input
+    type="email"
+    name="email-address"
+    id="email-address"
+    autocomplete="email"
+    required
+    class="w-full min-w-0 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:w-56 sm:text-sm/6"
+    placeholder="Enter your email"
+  />
+  <div class="mt-4 sm:ml-4 sm:mt-0 sm:shrink-0">
+    <button
+      type="submit"
+      class="flex w-full items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+      >Subscribe</button
+    >
+  </div>
+</form>
+
+<style>
+  .invalid-feedback,
+  .empty-feedback {
+    display: none;
+  }
+
+  .was-validated :placeholder-shown:invalid ~ .empty-feedback {
+    display: block;
+  }
+
+  .was-validated :not(:placeholder-shown):invalid ~ .invalid-feedback {
+    display: block;
+  }
+
+  .is-invalid,
+  .was-validated :invalid {
+    border-color: #dc3545;
+  }
+</style>
+
+<script is:inline>
+  // use astro:page-load event if you are using View Transitions
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+      const form = document.getElementById("form")
+      const result = document.getElementById("result")
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault()
+        form.classList.add("was-validated")
+        if (!form.checkValidity()) {
+          form.querySelectorAll(":invalid")[0].focus()
+          return
+        }
+        const formData = new FormData(form)
+        const object = Object.fromEntries(formData)
+        const json = JSON.stringify(object)
+
+        result.innerHTML = "Sending..."
+
+        fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: json,
+        })
+          .then(async (response) => {
+            let json = await response.json()
+            if (response.status == 200) {
+              result.classList.add("text-green-500")
+              result.innerHTML = json.message
+            } else {
+              console.log(response)
+              result.classList.add("text-red-500")
+              result.innerHTML = json.message
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+            result.innerHTML = "Something went wrong!"
+          })
+          .then(function () {
+            form.reset()
+            form.classList.remove("was-validated")
+            setTimeout(() => {
+              result.style.display = "none"
+            }, 5000)
+          })
+      })
+    },
+    { once: true },
+  )
+</script>
