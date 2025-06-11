@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets"
 import Layout from "../layouts/Layout.astro"
+import MeJoy from '../assets/images/me_joyful.jpg';
 ---
 
 <Layout title="Commission Request">
@@ -10,7 +12,7 @@ import Layout from "../layouts/Layout.astro"
 
       <p class="pt-8 text-center">Thanks your request has been submitted! I will be in touch with you soon to discuss the details of your commission.</p>
 
-      <img src="src/assets/images/me_joyful.jpg"/>
+      <Image src={MeJoy} alt="Happy Ari picture"/>
 
       <canvas id="confetti-canvas" style="position:fixed;pointer-events:none;top:0;left:0;width:100vw;height:100vh;z-index:9999" ></canvas>
     </div>
