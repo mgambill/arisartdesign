@@ -37,7 +37,7 @@ export const prerender = true
 
 
       {entry.data.image ? (
-          <Image src={entry.data.image} alt={entry.data.title} />
+        <Image src={entry.data.image} alt={entry.data.title}  class="aspect-auto max-h-[80vh] object-contain"  />
         ) : (
           <p>No image available</p>
           // <h2 class="py-8 px-4 text-6xl font-extralight font-serif ">{entry.data.title}</h2>
