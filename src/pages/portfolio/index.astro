@@ -3,17 +3,15 @@ import Banner from "src/components/Banner.astro"
 import BlockImage from "src/components/BlockImage.astro"
 import { getCollection } from "astro:content"
 import Layout from "../../layouts/Layout.astro"
-import { Image } from "astro:assets"
 
-const links = [{ label: "Portfolio" }]
 const filter = Astro.url.searchParams.get("filter") || ""
 const portfolio = await getCollection("portfolio")
 const categories = await getCollection("categories")
 
 // Custom groupBy function
-function groupBy(array, keyFn) {
+function groupBy<T extends Record<string, T>, K extends keyof T>(array:T[], keyFn:(item:T)=>K) {
   return array.reduce((result, item) => {
-    const key = keyFn(item)
+    const key:K = keyFn(item)
     if (!result[key]) {
       result[key] = []
     }
@@ -41,7 +39,7 @@ export const prerender = true;
   <div class="flex flex-col">
     <Banner label="Portfolio" />
     <div class="p-10">
-      <div class="pb-10">
+      <div class="pb-10 hidden">
         {
           [allCategory, ...categories].map((cat, i) => (
             <>
@@ -58,9 +56,24 @@ export const prerender = true;
       </div>
 
       <div class="columns-1 sm:columns-2 lg:columns-3">
-
-        {filteredItems && filteredItems.map((a) => <BlockImage url={`/portfolio/${a.id}`} title={a.data.title} image={a.data.image} />)}
+        {filteredItems && filteredItems.map((a) => <BlockImage data-category={a.data.category} url={`/portfolio/${a.id}`} title={a.data.title} image={a.data.image} />)}
       </div>
     </div>
   </div>
 </Layout>
+
+<script is:inline>
+  function filterPortfolio() {
+    const params = new URLSearchParams(window.location.search);
+    const filter = params.get('filter');
+    document.querySelectorAll('.portfolio-item').forEach(el => {
+      if (!filter || filter.toLowerCase() === 'all' || el.getAttribute('data-category') === filter) {
+        el.style.display = '';
+      } else {
+        el.style.display = 'none';
+      }
+    });
+  }
+  window.addEventListener('DOMContentLoaded', filterPortfolio);
+  window.addEventListener('popstate', filterPortfolio);
+</script>
