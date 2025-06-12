@@ -1,6 +1,6 @@
 ---
 import Banner from "src/components/Banner.astro"
-import BlockImage from "src/components/BlockImage"
+import BlockImage from "src/components/BlockImage.astro"
 import { getCollection } from "astro:content"
 import Layout from "../../layouts/Layout.astro"
 import { Image } from "astro:assets"
@@ -29,6 +29,12 @@ const filteredItems = filter && filter.toLowerCase() !== "all" ? groupedItems[fi
 
 const resolveCategory = (cat: string) => categories.find((c) => c.id === cat)
 const allCategory = { id: "", data: { label: "All" }, count: portfolio.length }
+
+export async function getStaticPaths() {
+  const projects = await getCollection("portfolio")
+  return projects.map((item) => ({ params: { slug: item.id } }))
+}
+export const prerender = true;
 ---
 
 <Layout title="Portfolio">
@@ -52,6 +58,7 @@ const allCategory = { id: "", data: { label: "All" }, count: portfolio.length }
       </div>
 
       <div class="columns-1 sm:columns-2 lg:columns-3">
+
         {filteredItems && filteredItems.map((a) => <BlockImage url={`/portfolio/${a.id}`} title={a.data.title} image={a.data.image} />)}
       </div>
     </div>

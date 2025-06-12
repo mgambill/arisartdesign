@@ -19,6 +19,8 @@ export async function getStaticPaths() {
   const projects = await getCollection("projects")
   return projects.map((item) => ({ params: { slug: item.id } }))
 }
+
+export const prerender = true;
 ---
 
 <Layout title={entry.data.title}>
