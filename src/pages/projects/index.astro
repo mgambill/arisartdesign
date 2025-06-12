@@ -1,30 +1,21 @@
 ---
-import Banner from '/src/components/Banner.astro'
-import { getCollection } from 'astro:content'
-import Layout from '../../layouts/Layout.astro'
-import { Image } from 'astro:assets'
+import Banner from "/src/components/Banner.astro"
+import BlockImage from "/src/components/BlockImage.astro"
+import { getCollection } from "astro:content"
+import Layout from "../../layouts/Layout.astro"
+import { Image } from "astro:assets"
 
-const projects = await getCollection('projects')
-const links = [{ label: 'Projects' }]
+const projects = await getCollection("projects")
+const links = [{ label: "Projects" }]
 ---
 
 <Layout title="Projects">
-
   <div class="flex flex-col">
     <Banner label="Projects" />
-  <div class="p-10">
-    <div class="grid md:grid-cols-3 gap-10 *:hover:fill-black/10 *:hover:opacity-50 *:hover:grayscale">
-      {
-        projects.map((a) => (
-          <a href={`/projects/${a.id}`} class="group grid aspect-[1/1.2] overflow-hidden border border-gray-200 *:col-span-full *:row-span-full hover:!border-gray-400 hover:!opacity-100 hover:!grayscale-0" data-astro-prefetch>
-            <Image src={a.data.image} alt={a.data.title} class="aspect-[1/1.2] w-full object-cover transition group-hover:scale-110" />
-            <div class="z-10 self-end bg-white/70 p-2">
-              <p class="text-sm font-medium text-black">{a.data.title}</p>
-            </div>
-          </a>
-        ))
-      }
+    <div class="p-10">
+      <div class="columns-1 sm:columns-2 lg:columns-3">
+        {projects.map((a) => <BlockImage url={`/projects/${a.id}`} title={a.data.title} image={a.data.image} />)}
+      </div>
     </div>
-  </div>
   </div>
 </Layout>

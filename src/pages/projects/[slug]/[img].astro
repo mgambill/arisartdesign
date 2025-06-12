@@ -1,0 +1,34 @@
+---
+import Layout from "../../../layouts/Layout.astro"
+import { getCollection, getEntry, render } from "astro:content"
+import Breadcrumb from "src/components/Breadcrumb.astro"
+import { Image } from "astro:assets"
+
+const { slug, img } = Astro.params
+if (!slug) throw new Error("Slug not found")
+
+const entry = await getEntry("projects", slug)
+
+const image = entry?.data?.images?.find((a) => a.name.slug === img)
+
+if (!entry) throw new Error("No project found for this slug")
+const { Content } = await render(entry)
+
+// Generate static pages
+// export async function getStaticPaths() {
+//   const projects = await getCollection("projects")
+//   return projects.map((item) => ({ params: { slug: item.id } }))
+// }
+---
+
+<Layout title="Foo">
+  <div class="relative isolate text-zinc-800">
+    <div class="relative p-10">
+
+      <Breadcrumb links={[{ label: "Projects", url: "/projects" }, { label: entry.data.title, url:`/projects/${entry.id}` }, { label: image?.name.name }]} />
+
+      {image && <Image src={image.image} alt={image?.name.name} class="aspect-auto max-h-[80vh] object-contain" />}
+    </div>
+
+  </div>
+</Layout>

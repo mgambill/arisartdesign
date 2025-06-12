@@ -1,18 +1,20 @@
 ---
 import { Image } from "astro:assets"
 import Layout from "../layouts/Layout.astro"
-import MeJoy from '../assets/images/me_joyful.jpg';
+import MeJoy from '../assets/images/me_joyful.png';
+import Banner from "src/components/Banner.astro"
+
 ---
 
 <Layout title="Commission Request">
+  <Banner label="Commission Request"/>
   <!-- Main content -->
   <div class="flex-1 xl:overflow-y-auto">
     <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
-      <h1 class="text-3xl font-bold tracking-tight text-slate-900 text-center">Artwork Commission Request</h1>
 
-      <p class="pt-8 text-center">Thanks your request has been submitted! I will be in touch with you soon to discuss the details of your commission.</p>
+      <p class="pt-8 text-center text-lg">Thanks your request has been submitted! I will be in touch with you soon to discuss the details of your commission.</p>
 
-      <Image src={MeJoy} alt="Happy Ari picture"/>
+      <Image src={MeJoy} alt="Happy Ari picture" width={500} class="mx-auto"/>
 
       <canvas id="confetti-canvas" style="position:fixed;pointer-events:none;top:0;left:0;width:100vw;height:100vh;z-index:9999" ></canvas>
     </div>
@@ -29,7 +31,7 @@ import MeJoy from '../assets/images/me_joyful.jpg';
       colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8'],
       particleCount: 150,
       spread: 180,
-      origin: { y: 0.25 },
+      origin: { y: 0.50 },
       shapes: ['star']
     })
   })

@@ -1,11 +1,4 @@
-import {
-  config,
-  fields,
-  collection,
-  singleton,
-  type LocalConfig,
-  type CloudConfig,
-} from "@keystatic/core"
+import { config, fields, collection, singleton, type LocalConfig, type CloudConfig } from "@keystatic/core"
 import { wrapper, repeating } from "@keystatic/core/content-components"
 
 const isProd = process.env.NODE_ENV === "production"
@@ -26,7 +19,7 @@ export default config({
     navigation: {
       Site: ["portfolio", "posts", "projects", "samples"],
       Pages: ["about", "home", "coming"],
-      "Footer Links": ["socialLinks", "---", "settings", "categories","sections"],
+      "Footer Links": ["socialLinks", "---", "settings", "categories", "sections"],
     },
   },
   singletons: {
@@ -144,7 +137,7 @@ export default config({
       path: "src/content/categories/*",
       schema: {
         label: fields.slug({ name: { label: "Label" } }),
-        order: fields.integer({ label: "Order" })
+        order: fields.integer({ label: "Order" }),
       },
     }),
     sections: collection({
@@ -169,7 +162,7 @@ export default config({
           label: "Cover Image",
           directory: "src/assets/images/sections",
           publicPath: "../../assets/images/sections",
-        })
+        }),
       },
     }),
     projects: collection({
@@ -199,6 +192,31 @@ export default config({
             publicPath: "../../assets/images/projects",
           },
         }),
+        images: fields.array(
+          fields.object({
+            name: fields.slug({
+              name: {
+                label: "Name",
+              },
+              slug: {
+                label: "Slug",
+                description: "url-friendly name for the image",
+              }
+          }),
+            image: fields.image({
+              label: "Cover Image",
+              directory: "src/assets/images/samples",
+              publicPath: "../../assets/images/samples",
+              validation: {
+                isRequired: true,
+              }
+            }),
+          }),
+          {
+            label: "Images",
+            itemLabel: item => item.fields.name.value.name || 'Image'
+          },
+        ),
       },
     }),
     portfolio: collection({

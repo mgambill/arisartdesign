@@ -1,0 +1,24 @@
+---
+import { Image } from "astro:assets"
+
+type Props = {
+  url: string
+  title: string
+  image?: ImageMetadata
+  children?: React.ReactNode
+}
+
+const { url, image, title } = Astro.props
+---
+
+<a href={url} class="group relative mb-6 block break-inside-avoid overflow-hidden" data-astro-prefetch>
+  <div class="group absolute inset-0">
+    <div
+      class="balance absolute left-1/2 top-1/2 z-30 -translate-x-3/4 -translate-y-1/2 text-center uppercase tracking-wide text-white opacity-0 transition-all duration-300 focus:-translate-x-1/2 focus:opacity-100 group-hover:-translate-x-1/2 group-hover:opacity-100"
+    >
+      {title}
+    </div>
+    <div class="absolute inset-0 z-20 bg-black/70 opacity-0 duration-300 group-hover:opacity-100"></div>
+  </div>
+  <Image src={image} alt={title} class="aspect-auto max-h-[80vh] object-contain transition-transform duration-300 group-hover:scale-105" />
+</a>

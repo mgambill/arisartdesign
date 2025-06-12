@@ -2,7 +2,8 @@
 import { getEntry, render } from "astro:content"
 import Layout from "../layouts/Layout.astro"
 import Banner from "src/components/Banner.astro"
-
+import NightSky from '../assets/images/about/nigthsky.jpg'
+import { Image } from "astro:assets"
 const aboutPage = await getEntry("pages", "about")
 const { Content } = await render(aboutPage)
 const links = [{ label: "About" }]
@@ -13,9 +14,25 @@ const links = [{ label: "About" }]
     <!-- <Breadcrumb links={links} /> -->
     <Banner label="About Me" />
     <div class="w-full p-10">
-      <div class="prose prose-zinc max-w-none dark:prose-invert">
-        <Content />
+      <div class="grid sm:grid-cols-2 gap-10">
+
+        <Image src={NightSky} alt="Night Sky" class="w-full h-auto rounded-lg mb-4" />
+
+          <div class=" text-2xl grid items-center leading-[3rem] ">
+
+<div>
+
+          <span class="text-4xl inlne-block font-light font-sans uppercase">V</span>ictoria is a young Black creative as well as a college student attending RISD.
+
+          For her, being a creative is not just a job- it is a way of life. She constantly seeks out new sources of inspiration,
+          experimenting with different mediums, and pushing herself to grow and evolve as an artist. Whether she is working on a
+          personal project or collaborating with others, she pours her heart and soul into everything that she does and hopes that
+          it shows in the end result.
+</div>
+        </div>
       </div>
+
+
     </div>
   </div>
 </Layout>

@@ -1,5 +1,6 @@
 ---
 import Banner from "src/components/Banner.astro"
+import BlockImage from "src/components/BlockImage"
 import { getCollection } from "astro:content"
 import Layout from "../../layouts/Layout.astro"
 import { Image } from "astro:assets"
@@ -24,11 +25,10 @@ function groupBy(array, keyFn) {
 const groupedItems = groupBy(portfolio, (x) => x.data.category)
 
 // Filter groupedItems based on the filter variable
-const filteredItems =
-  filter && filter.toLowerCase() !== "all" ? groupedItems[filter] : portfolio
+const filteredItems = filter && filter.toLowerCase() !== "all" ? groupedItems[filter] : portfolio
 
 const resolveCategory = (cat: string) => categories.find((c) => c.id === cat)
-const allCategory = { id: "", data: { label: "All" }, count: portfolio.length  }
+const allCategory = { id: "", data: { label: "All" }, count: portfolio.length }
 ---
 
 <Layout title="Portfolio">
@@ -37,47 +37,22 @@ const allCategory = { id: "", data: { label: "All" }, count: portfolio.length  }
     <div class="p-10">
       <div class="pb-10">
         {
-          [allCategory, ...categories]
-
-            .map((cat, i) => (
-              <>
-                <> {i > 0 && <span class="mx-1">|</span>}</>
-                <a
-                  href={`/portfolio/?filter=${cat.id}`}
-                  class:list={[
-                    "mx-1 rounded px-4 py-1.5 ",
-                    filter === cat.id
-                      ? "bg-blue-500 text-white"
-                      : "hover:bg-blue-100 hover:text-blue-700 ",
-                  ]}
-                >
-                  {cat.data?.label}
-                  ({ cat.count ?? groupedItems[cat.id]?.length ?? 0 })
-                </a>
-              </>
-            ))
+          [allCategory, ...categories].map((cat, i) => (
+            <>
+              <> {i > 0 && <span class="mx-1">|</span>}</>
+              <a
+                href={`/portfolio/?filter=${cat.id}`}
+                class:list={["mx-1 rounded px-4 py-1.5 ", filter === cat.id ? "bg-primary text-white" : "hover:bg-blue-100 hover:text-blue-700 "]}
+              >
+                {cat.data?.label}({cat.count ?? groupedItems[cat.id]?.length ?? 0})
+              </a>
+            </>
+          ))
         }
       </div>
 
-      <div
-        class="grid gap-10 *:hover:fill-black/10 *:hover:opacity-50 *:hover:grayscale md:grid-cols-3"
-      >
-        {
-          filteredItems &&
-            filteredItems.map((a) => (
-              <a
-                href={`/portfolio/${a.id}`}
-                class="group grid aspect-[1/1.2] overflow-hidden border border-gray-200 *:col-span-full *:row-span-full hover:!border-gray-400 hover:!opacity-100 hover:!grayscale-0"
-                data-astro-prefetch
-              >
-                <Image
-                  src={a.data.image}
-                  alt={a.data.title}
-                  class="aspect-[1/1.2] w-full object-cover transition group-hover:scale-110"
-                />
-              </a>
-            ))
-        }
+      <div class="columns-1 sm:columns-2 lg:columns-3">
+        {filteredItems && filteredItems.map((a) => <BlockImage url={`/portfolio/${a.id}`} title={a.data.title} image={a.data.image} />)}
       </div>
     </div>
   </div>

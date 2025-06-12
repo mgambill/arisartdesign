@@ -19,12 +19,12 @@ export default function Header() {
   ]
 
   return (
-    <Disclosure as="nav" className="bg-stone-50 dark:bg-transparent">
-      <div className="container mx-auto border-t border-stone-50 bg-white shadow dark:border-stone-900 dark:bg-black">
+    <Disclosure as="nav" className="bg-white/40 dark:bg-transparent">
+      <div className=" bg-white dark:border-stone-900 dark:bg-black">
         <div className="relative flex h-24 justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             {/* Mobile menu button */}
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
               <svg
@@ -65,7 +65,7 @@ export default function Header() {
             <a className="sm:hidden" href="/">
               <img src="/logo.png" alt="Logo" className="h-24 dark:invert" />
             </a>
-            <div className="hidden items-center sm:ml-6 sm:flex sm:space-x-8">
+            <div className="hidden items-center sm:ml-6 sm:flex sm:space-x-8 text-xl">
               {menu.map((item) =>
                 item.logo ? (
                   <a key="logo" href="/">
@@ -81,9 +81,10 @@ export default function Header() {
                     href={item.href}
                     className={
                       pathname === item.href
-                        ? "border-indigo-500 font-serif text-blue-500 font-medium"
-                        : "border-transparent font-serif text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                        ? "text-shadow font-serif text-primary font-medium  border-b border-primary"
+                        : "font-serif text-gray-500 hover:border-gray-300 hover:text-gray-700"
                     }
+
                   >
                     {item.text}
                   </a>
@@ -104,10 +105,10 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 className={`
-                      block border-l-4 py-2 pl-3 pr-4 text-base font-medium
+                      block border-l-4 py-2 pl-3 pr-4 font-medium
                       ${
                         pathname === item.href
-                          ? "border-blue-500 bg-blue-50 text-blue-500"
+                          ? "border-primary bg-blue-50 text-primary"
                           : "border-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
                       }
                     `}
@@ -120,3 +121,4 @@ export default function Header() {
     </Disclosure>
   )
 }
+

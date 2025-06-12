@@ -1,0 +1,70 @@
+---
+import { getCollection, getEntry, render } from "astro:content"
+import Layout from "../../../layouts/Layout.astro"
+import BlockImage from "src/components/BlockImage.astro"
+import Breadcrumb from "src/components/Breadcrumb.astro"
+import { Image } from "astro:assets"
+import Gallery from "src/components/Gallery.tsx"
+
+const { slug } = Astro.params
+if (!slug) throw new Error("Slug not found")
+
+const entry = await getEntry("projects", slug)
+
+if (!entry) throw new Error("No project found for this slug")
+const { Content } = await render(entry)
+
+// Generate static pages
+export async function getStaticPaths() {
+  const projects = await getCollection("projects")
+  return projects.map((item) => ({ params: { slug: item.id } }))
+}
+---
+
+<Layout title={entry.data.title}>
+  <div class="relative isolate text-zinc-800">
+    <div class="relative p-10">
+      <Breadcrumb links={[{ label: "Projects", url: "/projects" }, { label: entry.data.title }]} />
+      <div class="mx-auto flex max-w-screen-xl flex-col gap-10">
+        <Image src={entry.data.image} alt={entry.data.title} class="aspect-auto max-h-[80vh] object-contain" />
+
+        <div class="prose max-w-none">
+          <h2 class="mb-8 text-3xl font-medium uppercase tracking-wide">{entry.data.title}</h2>
+          <Content />
+        </div>
+        <!-- <Gallery
+          mainImage={{
+            src: entry.data.image,
+            alt: entry.data.title,
+            title: entry.data.title,
+            url: `/projects/${slug}`,
+          }}
+
+          galleryImages={entry.data.images?.map( i => ({
+            src: i.image,
+            alt: i.name.name,
+            title: i.name.name,
+            url: `/projects/${slug}/${i.name.slug}`,
+          })) || []}
+          client:load
+        /> -->
+
+        <div class="columns-1 p-6 sm:columns-2 lg:columns-3">
+          {
+            entry.data.images?.map((a) => (
+              <BlockImage
+                url={`/projects/${slug}/${a.name.slug}`}
+                title={a.name.name}
+                image={a.image}
+                onClick={() => {
+                  const evt = new CustomEvent("open-lightbox", { detail: { src: a.image, alt: a.name } })
+                  window.dispatchEvent(evt)
+                }}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

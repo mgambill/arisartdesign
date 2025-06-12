@@ -22,8 +22,17 @@ const projects = defineCollection({
   // Type-check frontmatter using a schema
   schema: ({ image }) => z.object({
     title: z.string(),
-    image: image()
-
+    image: image(),
+    public: z.boolean().optional(),
+    images: z.array(
+      z.object({
+        image: image().optional(),
+        name: z.object({
+          name: z.string(),
+          slug: z.string()
+        })
+      })
+    ).optional(),
   }),
 })
 
