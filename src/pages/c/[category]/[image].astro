@@ -5,20 +5,24 @@ import Layout from "../../../layouts/Layout.astro"
 import BlockImage from "src/components/BlockImage.astro"
 import { toCodes } from "astro:i18n"
 import Breadcrumb from "src/components/Breadcrumb.astro"
+import Banner from "src/components/Banner.astro"
+
 const { image, category } = Astro.params
+
 if (!image) throw new Error('Image not found')
 if (!category) throw new Error('Category not found')
 
 const portfolio = await getCollection("portfolio", (a) => a.data.categories?.includes(category) && a.id === image);
-
-
-// .filter(a => [].contains(a.id) )
+const categories = await getCollection("categories")
+const currentCategory = categories.find((c) => c.id === category);
 ---
 
 <Layout title="">
-  <div class="w-full mt-24">
+  <div class="w-full">
+
+    <Banner label={currentCategory?.data.label ?? ''} />
     <div class="relative p-10">
-    <Breadcrumb links={[ { label: category, url: `/c/${category}` }, { label: portfolio[0].data.title } ]} />
+    <Breadcrumb links={[ { label: currentCategory?.data.label ?? 'N/A', url: `/c/${category}` }, { label: portfolio[0].data.title } ]} />
 
       <div class="columns-1 sm:columns-2 lg:columns-3">
         {portfolio.map((a) => <BlockImage data-category={a.data.category} slug={a.id} url={`/c/${category}/${a.id}`} title={a.data.title} image={a.data.image} />)}

@@ -4,17 +4,27 @@ import Layout from "../../../layouts/Layout.astro"
 import Hero from "src/components/Hero.astro"
 import { Image } from "astro:assets"
 import BlockImage from "src/components/BlockImage.astro"
+import Banner from "src/components/Banner.astro"
 const { category } = Astro.params
 if (!category) throw new Error('Category not found')
 
-const portfolio = await getCollection("portfolio", (a) => a.data.categories?.includes(category));
 
+const categories = await getCollection("categories")
+const portfolio = await getCollection("portfolio", (a) => a.data.categories?.includes(category));
+const currentCategory = categories.find((c) => c.id === category);
+const map = {
+  "visual-development": "Visual Development",
+  "character-design": "Character Design",
+}
 // .filter(a => [].contains(a.id) )
 ---
 
 <Layout title="">
-  <div class="w-full mt-24">
-    <div class="p-6">
+  <div class="w-full">
+
+    <Banner label={currentCategory?.data.label ?? ''} />
+
+    <div class="p-10">
       <div class="columns-1 sm:columns-2 lg:columns-3">
         {portfolio.map((a) => <BlockImage data-category={a.data.category} slug={a.id} url={`/c/${category}/${a.id}`} title={a.data.title} image={a.data.image} />)}
       </div>
