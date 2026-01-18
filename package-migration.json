@@ -1,0 +1,20 @@
+{
+  "name": "pocketbase-migration",
+  "version": "1.0.0",
+  "description": "Migration script for Ari's Art Design to PocketBase",
+  "type": "module",
+  "scripts": {
+    "migrate": "tsx migrate-to-pocketbase.ts",
+    "migrate:dry-run": "tsx migrate-to-pocketbase.ts --dry-run"
+  },
+  "dependencies": {
+    "pocketbase": "^0.21.5",
+    "gray-matter": "^4.0.3",
+    "marked": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}

@@ -230,6 +230,11 @@ export default config({
           label: "Category",
           collection: "categories",
         }),
+        categories: fields.multiRelationship({
+          label: "Categories",
+          collection: "categories",
+        }),
+        
         // category: fields.select({
         //   label: "Role",
         //   description: "Portfolio category",
@@ -243,6 +248,7 @@ export default config({
         //   ],
         //   defaultValue: "uncategorized",
         // }),
+        showOnHome: fields.checkbox({ label: "Show on Home Page", defaultValue: false }),
         public: fields.checkbox({ label: "Public", defaultValue: true }),
         image: fields.image({
           label: "Image",

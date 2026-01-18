@@ -25,8 +25,8 @@ export const prerender = true;
 
 <Layout title={entry.data.title}>
   <div class="relative isolate text-zinc-800">
-    <div class="relative p-10">
-      <Breadcrumb links={[{ label: "Projects", url: "/projects" }, { label: entry.data.title }]} />
+    <div class="relative px-10 pt-36">
+      <Breadcrumb links={[{ label: "Personal", url: "/personal" }, { label: entry.data.title }]} />
       <div class="mx-auto flex max-w-screen-xl flex-col gap-10">
         <Image src={entry.data.image} alt={entry.data.title} class="aspect-auto max-h-[80vh] object-contain" />
 

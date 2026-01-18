@@ -22,10 +22,10 @@ const { Content } = await render(entry)
 ---
 
 <Layout title="Foo">
-  <div class="relative isolate text-zinc-800">
-    <div class="relative p-10">
+  <div class="relative isolate text-zinc-800 pt-36">
+    <div class="relative px-10 pt-36">
 
-      <Breadcrumb links={[{ label: "Projects", url: "/projects" }, { label: entry.data.title, url:`/projects/${entry.id}` }, { label: image?.name.name }]} />
+      <Breadcrumb links={[{ label: "Personal", url: "/personal" }, { label: entry.data.title, url:`/personal/${entry.id}` }, { label: image?.name.name }]} />
 
       {image && <Image src={image.image} alt={image?.name.name} class="aspect-auto max-h-[80vh] object-contain" />}
     </div>

@@ -42,8 +42,10 @@ const portfolio = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(),
     image: image(),
-    public: z.boolean(),
-    category: z.string()
+    public: z.boolean().optional(),
+    showOnHome: z.boolean().optional(),
+    category: z.string().optional(),
+    categories: z.array(z.string()).optional(),
   }),
 })
 

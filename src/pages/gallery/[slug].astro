@@ -21,10 +21,10 @@ export const prerender = true
 ---
 
 <Layout title="links" >
-  <div class="relative isolate bg-white text-zinc-800">
+  <div class="relative isolate bg-white text-zinc-800 pt-20">
     <div style={{ 'background-image': `url(${entry.data.image})` }} class="absolute inset-0 left-1/3 -z-10 flex-1 bg-cover bg-right bg-no-repeat p-10 opacity-5 grayscale"></div>
     <div class="relative p-10">
-      <Breadcrumb links={[ { label: 'Portfolio', url: '/portfolio' }, { label: entry.data.title ?? 'Untitled' } ]} />
+      <Breadcrumb links={[ { label: 'Gallery', url: '/gallery' }, { label: entry.data.title ?? 'Untitled' } ]} />
       <div class="gap-10">
 
         <!-- <div

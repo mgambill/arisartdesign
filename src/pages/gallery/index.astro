@@ -8,44 +8,44 @@ const filter = Astro.url.searchParams.get("filter") || ""
 const portfolio = await getCollection("portfolio")
 const categories = await getCollection("categories")
 
-// Custom groupBy function
-function groupBy<T extends Record<string, T>, K extends keyof T>(array:T[], keyFn:(item:T)=>K) {
-  return array.reduce((result, item) => {
-    const key:K = keyFn(item)
-    if (!result[key]) {
-      result[key] = []
-    }
-    result[key].push(item)
-    return result
-  }, {})
-}
+// // Custom groupBy function
+// function groupBy<T extends Record<string, T>, K extends keyof T>(array:T[], keyFn:(item:T)=>K) {
+//   return array.reduce((result, item) => {
+//     const key:K = keyFn(item)
+//     if (!result[key]) {
+//       result[key] = []
+//     }
+//     result[key].push(item)
+//     return result
+//   }, {})
+// }
 
-const groupedItems = groupBy(portfolio, (x) => x.data.category)
+// const groupedItems = groupBy(portfolio, (x) => x.data.category)
 
-// Filter groupedItems based on the filter variable
-const filteredItems = filter && filter.toLowerCase() !== "all" ? groupedItems[filter] : portfolio
+// // Filter groupedItems based on the filter variable
+// const filteredItems = filter && filter.toLowerCase() !== "all" ? groupedItems[filter] : portfolio
 
-const resolveCategory = (cat: string) => categories.find((c) => c.id === cat)
-const allCategory = { id: "", data: { label: "All" }, count: portfolio.length }
+// const resolveCategory = (cat: string) => categories.find((c) => c.id === cat)
+// const allCategory = { id: "", data: { label: "All" }, count: portfolio.length }
 
-export async function getStaticPaths() {
-  const projects = await getCollection("portfolio")
-  return projects.map((item) => ({ params: { slug: item.id } }))
-}
+// export async function getStaticPaths() {
+//   const projects = await getCollection("portfolio")
+//   return projects.map((item) => ({ params: { slug: item.id } }))
+//}
 export const prerender = true;
 ---
 
-<Layout title="Portfolio">
+<Layout title="Gallery">
   <div class="flex flex-col">
-    <Banner label="Portfolio" />
+    <Banner label="Gallery" />
     <div class="p-10">
-      <div class="pb-10 hidden">
+      <!-- <div class="pb-10 hidden">
         {
           [allCategory, ...categories].map((cat, i) => (
             <>
               <> {i > 0 && <span class="mx-1">|</span>}</>
               <a
-                href={`/portfolio/?filter=${cat.id}`}
+                href={`/gallery/?filter=${cat.id}`}
                 class:list={["mx-1 rounded px-4 py-1.5 ", filter === cat.id ? "bg-primary text-white" : "hover:bg-blue-100 hover:text-blue-700 "]}
               >
                 {cat.data?.label}({cat.count ?? groupedItems[cat.id]?.length ?? 0})
@@ -53,10 +53,10 @@ export const prerender = true;
             </>
           ))
         }
-      </div>
+      </div> -->
 
       <div class="columns-1 sm:columns-2 lg:columns-3">
-        {filteredItems && filteredItems.map((a) => <BlockImage data-category={a.data.category} url={`/portfolio/${a.id}`} title={a.data.title} image={a.data.image} />)}
+        {portfolio.map((a) => <BlockImage data-category={a.data.category} url={`/gallery/${a.id}`} slug={a.id} title={a.data.title} image={a.data.image} />)}
       </div>
     </div>
   </div>

@@ -1,0 +1,27 @@
+---
+import { getEntry, getCollection, render } from "astro:content"
+import Layout from "../layouts/Layout.astro"
+import Hero from "src/components/Hero.astro"
+import { Image } from "astro:assets"
+import BlockImage from "src/components/BlockImage.astro"
+
+const homePage = await getEntry("pages", "home")
+const portfolio = await getCollection("portfolio", (a) => a.data.categories?.includes("visual-development"));
+
+
+// .filter(a => [].contains(a.id) )
+---
+
+<Layout title="">
+  <div class="w-full">
+
+    <pre>{ JSON.stringify(portfolio, null, 2)}</pre>
+
+    <div class="p-6">
+      <div class="columns-1 sm:columns-2 lg:columns-3">
+        {portfolio.map((a) => <BlockImage data-category={a.data.category} slug={a.id} url={`/gallery/${a.id}`} title={a.data.title} image={a.data.image} />)}
+      </div>
+
+    </div>
+  </div>
+</Layout>

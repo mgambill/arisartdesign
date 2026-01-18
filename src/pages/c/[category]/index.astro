@@ -1,0 +1,24 @@
+---
+import { getEntry, getCollection, render } from "astro:content"
+import Layout from "../../../layouts/Layout.astro"
+import Hero from "src/components/Hero.astro"
+import { Image } from "astro:assets"
+import BlockImage from "src/components/BlockImage.astro"
+const { category } = Astro.params
+if (!category) throw new Error('Category not found')
+
+const portfolio = await getCollection("portfolio", (a) => a.data.categories?.includes(category));
+
+// .filter(a => [].contains(a.id) )
+---
+
+<Layout title="">
+  <div class="w-full mt-24">
+    <div class="p-6">
+      <div class="columns-1 sm:columns-2 lg:columns-3">
+        {portfolio.map((a) => <BlockImage data-category={a.data.category} slug={a.id} url={`/c/${category}/${a.id}`} title={a.data.title} image={a.data.image} />)}
+      </div>
+
+    </div>
+  </div>
+</Layout>
