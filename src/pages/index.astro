@@ -2,12 +2,23 @@
 import { getEntry, getCollection, render } from "astro:content"
 import Layout from "../layouts/Layout.astro"
 import Hero from "src/components/Hero.astro"
-import { Image } from "astro:assets"
-import BlockImage from "src/components/BlockImage.astro"
+import PortfolioGallery from "src/components/PortfolioGallery"
+import { getImage } from "astro:assets"
 
 const homePage = await getEntry("pages", "home")
 const portfolio = await getCollection("portfolio")
 
+const portfolioItems = await Promise.all(
+  portfolio.filter(a => a.data.showOnHome).map(async (item) => {
+    const optimizedImage = await getImage({ src: item.data.image })
+    return {
+      id: item.id,
+      title: item.data.title,
+      image: optimizedImage.src,
+      category: item.data.category
+    }
+  })
+)
 
 // .filter(a => [].contains(a.id) )
 ---
@@ -16,53 +27,10 @@ const portfolio = await getCollection("portfolio")
   <div class="w-full">
     <Hero />
 
-    <div class="p-6">
-      <div class="columns-1 sm:columns-2 lg:columns-3">
-        {portfolio.filter(a => a.data.showOnHome).map((a) => <BlockImage data-category={a.data.category} slug={a.id} url={`/gallery/${a.id}`} title={a.data.title} image={a.data.image} />)}
-      </div>
+    <div class="p-10">
+      <PortfolioGallery client:load items={portfolioItems} />
 
     </div>
-    <!-- <div class="sm:px-20 md:px-0">
-
-      <div
-        class="grid gap-10 grid-cols-1 sm:px-10 sm:grid-cols-2 lg:grid-cols-3 py-40"
-      >
-        {
-          sections
-          .sort((a, b) => a.data.order - b.data.order)
-          .map((a) => (
-            <a
-              href={ a.data.type === 'project' ? `/projects` : a.data.type === 'portfolio' ? `/portfolio` : `/coming-soon`}
-
-            >
-            <div
-
-              class="group grid xl:size-[30rem] aspect-[1/1.4] mx-auto overflow-hidden border border-gray-200 *:col-span-full *:row-span-full hover:!border-gray-400 hover:!opacity-100 hover:!grayscale-0 relative"
-              data-astro-prefetch
-            >
-              {a.data.cover ? (
-                <Image
-                src={a.data.cover}
-                alt={a.data.title}
-                class="aspect-[1/1.4] w-full object-cover transition group-hover:scale-110"
-                />
-              ) : (
-                <div class="aspect-[1/1.4] w-full bg-gray-200"></div>
-              )}
-              </div>
-              <p class="p-2 text-center font-bold text-2xl">{a.data.title}</p>
-            </a>
-          ))
-        }
-      </div>
-      <div class="relative">
-        <div class="lg:w-1/2 bg-[url('/images/nightsky.jpg')] bg-cover bg-center bg-no-repeat h-96 mb-10">
-        </div>
-        <div class="prose prose-zinc max-w-none text-lg dark:prose-invert lg:absolute -top-8 left-1/2 lg:-translate-x-8 p-10 bg-[#dcc295] backdrop-blur-md">
-          <Content />
-        </div>
-      </div>
-    </div> -->
 
   </div>
 </Layout>
