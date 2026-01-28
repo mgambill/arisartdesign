@@ -197,7 +197,7 @@ export function Header() {
                   </h2>
                   <ul className="font-display text-base text-white">
                     <li><a href="/about">About</a></li>
-                    <li><a href="/commissions">Commissions</a></li>
+                    <li><a href="/commission">Commissions</a></li>
                   </ul>
                   {/* <ul role="list" className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2">
                     <li>
