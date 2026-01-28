@@ -1,7 +1,7 @@
 // src/components/Lightbox.tsx
-import { Fragment, useState } from 'react'
-import { Dialog, DialogPanel, Transition } from '@headlessui/react'
-import { XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
+import { Fragment, useState, useEffect } from "react"
+import { Dialog, DialogPanel, Transition } from "@headlessui/react"
+import { XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline"
 
 interface LightboxProps {
   images: Array<{
@@ -16,6 +16,13 @@ interface LightboxProps {
 export default function Lightbox({ images, isOpen, onClose, initialIndex = 0 }: LightboxProps) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex)
 
+  // Update current index when initialIndex changes or lightbox opens
+  useEffect(() => {
+    if (isOpen) {
+      setCurrentIndex(initialIndex)
+    }
+  }, [initialIndex, isOpen])
+
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
   }
@@ -25,61 +32,47 @@ export default function Lightbox({ images, isOpen, onClose, initialIndex = 0 }: 
   }
 
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'ArrowLeft') goToPrevious()
-    if (event.key === 'ArrowRight') goToNext()
-    if (event.key === 'Escape') onClose()
+    if (event.key === "ArrowLeft") goToPrevious()
+    if (event.key === "ArrowRight") goToNext()
+    if (event.key === "Escape") onClose()
   }
 
   return (
+    <Dialog open={isOpen} as="div" className="relative z-50" onClose={onClose}>
+      {/* Backdrop */}
+      <div className="fixed inset-0 bg-black/80" aria-hidden="true" />
 
-      <Dialog as="div" className="relative z-50" onClose={onClose}>
-
+      {/* Full-screen container */}
+      <div className="fixed inset-0 flex items-center justify-center p-4">
         <DialogPanel className="relative max-h-[90vh] max-w-[90vw]">
           {/* Close button */}
-          <button
-            type="button"
-            onClick={onClose}
-            className="absolute -top-12 right-0 z-10 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
-          >
+          {/* <button type="button" onClick={onClose} className="absolute -top-12 right-0 z-10 rounded-full bg-white/10 p-2 text-white hover:bg-white/20">
             <XMarkIcon className="h-6 w-6" />
-          </button>
+          </button> */}
 
           {/* Navigation buttons */}
           {images.length > 1 && (
             <>
-              <button
-                type="button"
-                onClick={goToPrevious}
-                className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
-              >
-                <ChevronLeftIcon className="h-6 w-6" />
+              <button type="button" onClick={goToPrevious} className="group absolute -left-14 top-0 h-full w-1/2 ">
+                <div className="flex h-full w-full items-center justify-start">
+                  <ChevronLeftIcon className="h-12 w-12 text-slate-200 group-hover:text-slate-400" />
+                </div>
               </button>
-              <button
-                type="button"
-                onClick={goToNext}
-                className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
-              >
-                <ChevronRightIcon className="h-6 w-6" />
+              <button type="button" onClick={goToNext} className="group absolute -right-14 top-0 h-full w-1/2 ">
+                <div className="flex h-full w-full items-center justify-end">
+                  <ChevronRightIcon className="h-12 w-12 text-slate-200 group-hover:text-slate-400" />
+                </div>
               </button>
             </>
           )}
 
           {/* Image */}
-          <img
-            src={images[currentIndex]?.src}
-            alt={images[currentIndex]?.alt}
-            className="max-h-[90vh] max-w-[90vw] object-contain"
-          />
+          <img src={images[currentIndex]?.src} alt={images[currentIndex]?.alt} className="max-h-[90vh] max-w-[90vw] object-contain" />
 
-          {/* Image counter */}
-          {images.length > 1 && (
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-white/10 px-4 py-2 text-white">
-              {currentIndex + 1} / {images.length}
-            </div>
-          )}
+          {/* Image title */}
+          <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 px-4 py-2 text-white">{images[currentIndex]?.alt}</div>
         </DialogPanel>
-
-      </Dialog>
-
+      </div>
+    </Dialog>
   )
 }

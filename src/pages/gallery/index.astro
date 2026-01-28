@@ -1,12 +1,27 @@
 ---
 import Banner from "src/components/Banner.astro"
 import BlockImage from "src/components/BlockImage.astro"
+import PortfolioGallery from "src/components/PortfolioGallery"
 import { getCollection } from "astro:content"
 import Layout from "../../layouts/Layout.astro"
+import { getImage } from "astro:assets"
 
 const filter = Astro.url.searchParams.get("filter") || ""
 const portfolio = await getCollection("portfolio")
 const categories = await getCollection("categories")
+
+// Prepare portfolio items for the React component
+const portfolioItems = await Promise.all(
+  portfolio.map(async (item) => {
+    const optimizedImage = await getImage({ src: item.data.image })
+    return {
+      id: item.id,
+      title: item.data.title,
+      image: optimizedImage.src,
+      category: item.data.category
+    }
+  })
+)
 
 // // Custom groupBy function
 // function groupBy<T extends Record<string, T>, K extends keyof T>(array:T[], keyFn:(item:T)=>K) {
@@ -39,41 +54,7 @@ export const prerender = true;
   <div class="flex flex-col">
     <Banner label="Gallery" />
     <div class="p-10">
-      <!-- <div class="pb-10 hidden">
-        {
-          [allCategory, ...categories].map((cat, i) => (
-            <>
-              <> {i > 0 && <span class="mx-1">|</span>}</>
-              <a
-                href={`/gallery/?filter=${cat.id}`}
-                class:list={["mx-1 rounded px-4 py-1.5 ", filter === cat.id ? "bg-primary text-white" : "hover:bg-blue-100 hover:text-blue-700 "]}
-              >
-                {cat.data?.label}({cat.count ?? groupedItems[cat.id]?.length ?? 0})
-              </a>
-            </>
-          ))
-        }
-      </div> -->
-
-      <div class="columns-1 sm:columns-2 lg:columns-3">
-        {portfolio.map((a) => <BlockImage data-category={a.data.category} url={`/gallery/${a.id}`} slug={a.id} title={a.data.title} image={a.data.image} />)}
-      </div>
+      <PortfolioGallery client:load items={portfolioItems} />
     </div>
   </div>
 </Layout>
-
-<script is:inline>
-  function filterPortfolio() {
-    const params = new URLSearchParams(window.location.search);
-    const filter = params.get('filter');
-    document.querySelectorAll('.portfolio-item').forEach(el => {
-      if (!filter || filter.toLowerCase() === 'all' || el.getAttribute('data-category') === filter) {
-        el.style.display = '';
-      } else {
-        el.style.display = 'none';
-      }
-    });
-  }
-  window.addEventListener('DOMContentLoaded', filterPortfolio);
-  window.addEventListener('popstate', filterPortfolio);
-</script>

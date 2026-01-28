@@ -2,37 +2,102 @@
 import { getEntry, render } from "astro:content"
 import Layout from "../layouts/Layout.astro"
 import Banner from "src/components/Banner.astro"
-import NightSky from '../assets/images/about/nigthsky.jpg'
+import MeVertical from "../assets/images/about/new-me.png"
+import MeHorizontal from "../assets/images/about/new-me-h.png"
 import { Image } from "astro:assets"
 const aboutPage = await getEntry("pages", "about")
-const { Content } = await render(aboutPage)
-const links = [{ label: "About" }]
+
 ---
 
-<Layout title="About">
-  <div class="flex flex-col">
+<Layout title="About" bgColor="bg-white">
+  <div class="flex flex-col bg-gradient-to-br from-purple-500/60 to-cyan-500/60 text-white">
     <!-- <Breadcrumb links={links} /> -->
     <Banner label="About Me" />
     <div class="w-full p-10">
-      <div class="grid sm:grid-cols-2 gap-10">
+      <div class="mb-20 grid gap-20 lg:grid-cols-[1.5fr_2fr] max-w-screen-xl mx-auto">
+        <Image src={MeVertical} alt="Victoria" class="h-auto w-full hidden lg:block" />
+        <Image src={MeHorizontal} alt="Victoria" class="h-auto w-full block lg:hidden" />
 
-        <Image src={NightSky} alt="Night Sky" class="w-full h-auto rounded-lg mb-4" />
-
-          <div class=" text-2xl grid items-center leading-[3rem] ">
-
-<div>
-
-          <span class="text-4xl inlne-block font-light font-sans uppercase">V</span>ictoria is a young Black creative as well as a college student attending RISD.
-
-          For her, being a creative is not just a job- it is a way of life. She constantly seeks out new sources of inspiration,
-          experimenting with different mediums, and pushing herself to grow and evolve as an artist. Whether she is working on a
-          personal project or collaborating with others, she pours her heart and soul into everything that she does and hopes that
-          it shows in the end result.
-</div>
+        <div class="grid items-center text-2xl leading-[3rem]">
+          <div>
+            <span class="inlne-block font-sans text-4xl font-light uppercase">V</span>ictoria is a young Black creative as well as a college student attending
+            RISD. For her, being a creative is not just a job- it is a way of life. She constantly seeks out new sources of inspiration, experimenting with
+            different mediums, and pushing herself to grow and evolve as an artist. Whether she is working on a personal project or collaborating with others,
+            she pours her heart and soul into everything that she does and hopes that it shows in the end result.
+          </div>
         </div>
       </div>
+    </div>
 
-
+    <!-- Waves -->
+    <div class="waves relative h-[15vh] max-h-[150px] min-h-[100px] w-full sm:h-10 sm:min-h-10 md:h-[15vh] md:min-h-[100px]">
+      <svg
+        class="relative h-full w-full"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 24 150 28"
+        preserveAspectRatio="none"
+        shape-rendering="auto"
+      >
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)"></use>
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)"></use>
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)"></use>
+          <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff"></use>
+        </g>
+      </svg>
     </div>
   </div>
+
+<!-- Small screen clip path -->
+<svg width="0" height="0" style="position: absolute;">
+  <defs>
+    <clipPath id="oval-clip-path-horizontal" clipPathUnits="objectBoundingBox">
+      <path d="M0.12,0.3 A0.30 0.40, 45 1 1, 0.88 0.7 A0.40 0.30, -45 1 1, 0.12 0.3"></path>
+    </clipPath>
+  </defs>
+</svg>
+
+<!-- Large screen clip path -->
+<svg width="0" height="0" style="position: absolute;">
+  <defs>
+    <clipPath id="oval-clip-path-vertical" clipPathUnits="objectBoundingBox">
+      <ellipse cx="0.5" cy="0.5" rx="0.32" ry="0.48" transform="rotate(15 0.5 0.5)"/>
+    </clipPath>
+  </defs>
+</svg>
 </Layout>
+
+<style>
+  /* Wave Animation */
+  .parallax > use {
+    animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+  }
+  .parallax > use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+  }
+  .parallax > use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+  }
+  .parallax > use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+  }
+  .parallax > use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+  }
+  @keyframes move-forever {
+    0% {
+      transform: translate3d(-90px, 0, 0);
+    }
+    100% {
+      transform: translate3d(85px, 0, 0);
+    }
+  }
+</style>
