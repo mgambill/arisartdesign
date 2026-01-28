@@ -43,8 +43,7 @@ export default function Gallery({ mainImage, galleryImages = [], children }: Gal
               image={image.src}
               onClick={() => openLightbox(index + 1)}
             >
-              <pre>{ JSON.stringify(image, null, 2 ) }</pre>
-              <Image src={image.url} alt={image.title} className="object-cover transition group-hover:scale-110" />
+              <Image src={image.url} alt={image.title} class="object-cover transition group-hover:scale-110" />
             </BlockImage>
           </div>
         ))}
