@@ -37,6 +37,7 @@ function NavigationItem({
               backgroundImage: `url(${background})`,
               backgroundSize: 'cover',
               backgroundPosition: position ?? 'center',
+              backgroundRepeat: 'no-repeat',
             }
           : undefined
       }
@@ -61,8 +62,8 @@ function Navigation() {
   return (
     <nav className="mt-px font-display text-5xl font-medium tracking-tight text-white">
       <NavigationRow>
-        <NavigationItem href="/gallery" background="/images/nightsky.jpg">Gallery</NavigationItem>
-        <NavigationItem href="/c/visual-development" background="/hero.jpeg">Visual Dev</NavigationItem>
+        <NavigationItem href="/gallery" background="/images/greece.jpg" position="center">Gallery</NavigationItem>
+        <NavigationItem href="/c/visual-development" background="/images/light-in-the-dark.jpg">Visual Dev</NavigationItem>
       </NavigationRow>
       <NavigationRow>
         <NavigationItem href="/c/character-design" background="/images/character-design.jpg" position="top">Character Design</NavigationItem>
