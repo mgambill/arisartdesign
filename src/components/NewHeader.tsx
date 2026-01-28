@@ -66,7 +66,7 @@ function Navigation() {
         <NavigationItem href="/c/visual-development" background="/images/light-in-the-dark.jpg">Visual Dev</NavigationItem>
       </NavigationRow>
       <NavigationRow>
-        <NavigationItem href="/c/character-design" background="/images/character-design.jpg" position="top">Character Design</NavigationItem>
+        <NavigationItem href="/c/character-design" background="/images/lyra-design-exploration.jpg" position="center 30%">Character Design</NavigationItem>
         <NavigationItem href="/personal" background="/images/me-again.jpg">Personal</NavigationItem>
       </NavigationRow>
     </nav>
