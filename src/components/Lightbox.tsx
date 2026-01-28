@@ -23,18 +23,25 @@ export default function Lightbox({ images, isOpen, onClose, initialIndex = 0 }: 
     }
   }, [initialIndex, isOpen])
 
+  // Add keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!isOpen) return
+      if (event.key === "ArrowLeft") goToPrevious()
+      if (event.key === "ArrowRight") goToNext()
+      if (event.key === "Escape") onClose()
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [isOpen])
+
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
   }
 
   const goToNext = () => {
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
-  }
-
-  const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === "ArrowLeft") goToPrevious()
-    if (event.key === "ArrowRight") goToNext()
-    if (event.key === "Escape") onClose()
   }
 
   return (
