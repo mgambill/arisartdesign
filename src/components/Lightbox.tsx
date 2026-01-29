@@ -51,7 +51,7 @@ export default function Lightbox({ images, isOpen, onClose, initialIndex = 0 }: 
 
       {/* Full-screen container */}
       <div className="fixed inset-0 flex items-center justify-center p-4">
-        <DialogPanel className="relative max-h-[90vh] max-w-[90vw]">
+        <DialogPanel className="relative flex flex-col max-h-[90vh] max-w-[90vw]">
           {/* Close button */}
           {/* <button type="button" onClick={onClose} className="absolute -top-12 right-0 z-10 rounded-full bg-white/10 p-2 text-white hover:bg-white/20">
             <XMarkIcon className="h-6 w-6" />
@@ -74,10 +74,10 @@ export default function Lightbox({ images, isOpen, onClose, initialIndex = 0 }: 
           )}
 
           {/* Image */}
-          <img src={images[currentIndex]?.src} alt={images[currentIndex]?.alt} className="max-h-[90vh] max-w-[90vw] object-contain" />
+          <img src={images[currentIndex]?.src} alt={images[currentIndex]?.alt} className="max-h-[80vh] max-w-[90vw] object-contain" />
 
           {/* Image title */}
-          <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 px-4 py-2 text-white">{images[currentIndex]?.alt}</div>
+          <div className="mt-2 px-4 py-2 text-white text-center">{images[currentIndex]?.alt} some more info</div>
         </DialogPanel>
       </div>
     </Dialog>
