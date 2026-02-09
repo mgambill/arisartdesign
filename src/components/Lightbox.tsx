@@ -77,7 +77,7 @@ export default function Lightbox({ images, isOpen, onClose, initialIndex = 0 }: 
           <img src={images[currentIndex]?.src} alt={images[currentIndex]?.alt} className="max-h-[80vh] max-w-[90vw] object-contain" />
 
           {/* Image title */}
-          <div className="mt-2 px-4 py-2 text-white text-center">{images[currentIndex]?.alt} some more info</div>
+          <div className="mt-2 px-4 py-2 text-white text-center">{images[currentIndex]?.alt}</div>
         </DialogPanel>
       </div>
     </Dialog>
