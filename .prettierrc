@@ -1,5 +1,6 @@
 {
   "semi": false,
+  "tailwindStylesheet": "./src/styles.css",
   "printWidth": 160,
   "plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"]
 }

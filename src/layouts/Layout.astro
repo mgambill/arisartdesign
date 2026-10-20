@@ -29,10 +29,10 @@ const { title, bgColor = 'bg-stone-100' } = Astro.props
     <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
   </head>
   <body
-    class="grid min-h-dvh grid-rows-[auto,1fr,auto]   dark:bg-zinc-900 dark:text-zinc-300"
+    class="grid min-h-dvh grid-rows-[auto_1fr_auto]   dark:bg-zinc-900 dark:text-zinc-300"
   >
     <Header client:only />
-     <div class={`w-full mx-auto flex flex-col ${bgColor} shadow dark:bg-zinc-950 pb-40 overflow-hidden`}>
+     <div class={`w-full mx-auto flex flex-col ${bgColor} shadow-sm dark:bg-zinc-950 pb-40 overflow-hidden`}>
       <slot />
     </div>
     <Footer />

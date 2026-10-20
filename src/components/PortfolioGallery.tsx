@@ -11,9 +11,10 @@ interface PortfolioItem {
 
 interface PortfolioGalleryProps {
   items: PortfolioItem[]
+  columnClassName?: string
 }
 
-export default function PortfolioGallery({ items }: PortfolioGalleryProps) {
+export default function PortfolioGallery({ items, columnClassName = 'columns-1' }: PortfolioGalleryProps) {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState(0)
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null)
@@ -61,7 +62,7 @@ export default function PortfolioGallery({ items }: PortfolioGalleryProps) {
 
   return (
     <>
-      <div className="columns-1 sm:columns-2 lg:columns-3">
+      <div className={columnClassName}>
         {items.map((item, index) => (
           <button
             key={item.id}
@@ -84,7 +85,7 @@ export default function PortfolioGallery({ items }: PortfolioGalleryProps) {
             <img
               src={item.image}
               alt={item.title}
-              className="aspect-auto max-h-[80vh] object-contain transition-transform duration-300 group-hover:scale-105"
+              className="mx-auto aspect-auto max-h-[80vh] object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </button>
         ))}

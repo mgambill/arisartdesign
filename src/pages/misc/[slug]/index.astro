@@ -27,7 +27,7 @@ export const prerender = true;
   <div class="relative isolate text-zinc-800">
     <div class="relative px-10 pt-36">
       <Breadcrumb links={[{ label: "Personal", url: "/personal" }, { label: entry.data.title }]} />
-      <div class="mx-auto flex max-w-screen-xl flex-col gap-10">
+      <div class="mx-auto flex max-w-(--breakpoint-xl) flex-col gap-10">
         <Image src={entry.data.image} alt={entry.data.title} class="aspect-auto max-h-[80vh] object-contain" />
 
         <div class="prose max-w-none">

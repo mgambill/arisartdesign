@@ -43,6 +43,10 @@ export default config({
           label: "YouTube",
           description: "You Tube username",
         }),
+        linkedIn: fields.text({
+          label: "LinkedIn",
+          description: "LinkedIn url",
+        }),
       },
     }),
     settings: singleton({
@@ -234,7 +238,7 @@ export default config({
           label: "Categories",
           collection: "categories",
         }),
-        
+
         // category: fields.select({
         //   label: "Role",
         //   description: "Portfolio category",
