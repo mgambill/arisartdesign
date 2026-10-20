@@ -2,6 +2,7 @@
 import { getEntry, getCollection, render } from "astro:content"
 import Layout from "../layouts/Layout.astro"
 import Hero from "src/components/Hero.astro"
+import {Navigation} from "src/components/NewHeader.tsx"
 import PortfolioGallery from "src/components/PortfolioGallery"
 import { getImage } from "astro:assets"
 
@@ -27,10 +28,14 @@ const portfolioItems = await Promise.all(
   <div class="w-full">
     <Hero />
 
-    <div class="p-10">
+    <div class="**:data-link:py-30">
+      <Navigation />
+    </div>
+
+    <!-- <div class="p-10">
       <PortfolioGallery client:load items={portfolioItems} />
 
-    </div>
+    </div> -->
 
   </div>
 </Layout>

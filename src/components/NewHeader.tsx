@@ -20,6 +20,7 @@ function NavigationItem({ href, children, background, position }: { href: string
   return (
     <a
       href={href}
+      data-link
       className="group relative isolate -mx-6 overflow-hidden bg-neutral-950 px-6 py-10 even:mt-px sm:mx-0 sm:px-0 sm:py-16 sm:odd:pl-16 sm:even:mt-0 sm:even:border-l sm:even:border-neutral-800 sm:even:pl-16"
       style={
         background
@@ -49,7 +50,7 @@ function NavigationItem({ href, children, background, position }: { href: string
   )
 }
 
-function Navigation() {
+export function Navigation() {
   return (
     <nav className="font-display mt-px text-5xl font-medium tracking-tight text-white">
       <NavigationRow>
