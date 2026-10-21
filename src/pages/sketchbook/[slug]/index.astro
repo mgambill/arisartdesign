@@ -34,22 +34,6 @@ export const prerender = true;
           <h2 class="mb-8 text-3xl font-medium uppercase tracking-wide">{entry.data.title}</h2>
           <Content />
         </div>
-        <!-- <Gallery
-          mainImage={{
-            src: entry.data.image,
-            alt: entry.data.title,
-            title: entry.data.title,
-            url: `/projects/${slug}`,
-          }}
-
-          galleryImages={entry.data.images?.map( i => ({
-            src: i.image,
-            alt: i.name.name,
-            title: i.name.name,
-            url: `/projects/${slug}/${i.name.slug}`,
-          })) || []}
-          client:load
-        /> -->
 
         <div class="columns-1 p-6 sm:columns-2 lg:columns-3">
           {

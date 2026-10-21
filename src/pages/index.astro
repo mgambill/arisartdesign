@@ -2,7 +2,7 @@
 import { getEntry, getCollection, render } from "astro:content"
 import Layout from "../layouts/Layout.astro"
 import Hero from "src/components/Hero.astro"
-import {Navigation} from "src/components/NewHeader.tsx"
+import { Navigation } from "src/components/NewHeader.tsx"
 import PortfolioGallery from "src/components/PortfolioGallery"
 import { getImage } from "astro:assets"
 
@@ -24,18 +24,13 @@ const portfolioItems = await Promise.all(
 // .filter(a => [].contains(a.id) )
 ---
 
-<Layout title="">
+<Layout title="" hideHeader>
   <div class="w-full">
     <Hero />
 
     <div class="**:data-link:py-30">
       <Navigation isHome />
     </div>
-
-    <!-- <div class="p-10">
-      <PortfolioGallery client:load items={portfolioItems} />
-
-    </div> -->
-
+    
   </div>
 </Layout>

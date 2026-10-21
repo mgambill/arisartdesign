@@ -9,12 +9,12 @@ const projects = await getCollection("projects")
 
 ---
 
-<Layout title="Miscellaneous">
+<Layout title="Sketchbook">
   <div class="flex flex-col">
-    <Banner label="Miscellaneous" />
+    <Banner label="Sketchbook" />
     <div class="p-10">
       <div class="columns-1 sm:columns-2 lg:columns-3">
-        {projects.map((a) => <BlockImage url={`/misc/${a.id}`} title={a.data.title} image={a.data.image} />)}
+        {projects.map((a) => <BlockImage url={`/sketchbook/${a.id}`} title={a.data.title} image={a.data.image} />)}
       </div>
     </div>
   </div>

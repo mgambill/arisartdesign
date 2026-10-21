@@ -17,7 +17,7 @@ function NavigationRow({ children }: { children: React.ReactNode }) {
   )
 }
 
-function NavigationItem({ href, children, background, position, isHome = false }: { href: string; background?: string; position?: string; children: React.ReactNode; isHome?: boolean }) {
+function NavigationItem({ href, children, background, position, isHome = false }: { href: string; background?: string; position?: string; isHome?: boolean; children: React.ReactNode }) {
   return (
     <a
       href={href}
@@ -45,7 +45,7 @@ function NavigationItem({ href, children, background, position, isHome = false }
           }}
         />
       )}
-      <span className="relative z-10 tracking-wide group-hover:font-light">{children}</span>
+      <div className="relative z-10 tracking-wide transition origin-left group-hover:scale-110">{children}</div>
       <span className={`${isHome ? "hidden" : "absolute inset-y-0 -z-10 w-screen bg-neutral-500 opacity-50 transition group-odd:right-0 group-even:left-0 group-hover:opacity-0"}`} />
     </a>
   )
@@ -55,8 +55,8 @@ export function Navigation({ isHome = false }: { isHome?: boolean }) {
   return (
     <nav className="font-display mt-px text-5xl font-medium tracking-tight text-white">
       <NavigationRow>
-        <NavigationItem isHome={isHome} href="/gallery" background="/images/greece.jpg" position="center">
-          Gallery
+        <NavigationItem isHome={isHome} href="/world-building" background="/images/greece.jpg">
+          World Building
         </NavigationItem>
         <NavigationItem isHome={isHome} href="/c/visual-development" background="/images/light-in-the-dark.jpg">
           Visual Dev
@@ -66,8 +66,8 @@ export function Navigation({ isHome = false }: { isHome?: boolean }) {
         <NavigationItem isHome={isHome} href="/c/character-design" background="/images/lyra-design-exploration.jpg" position="center 30%">
           Character Design
         </NavigationItem>
-        <NavigationItem isHome={isHome} href="/misc" background="/images/me-again.jpg">
-          Miscellaneous
+        <NavigationItem isHome={isHome} href="/sketchbook" background="/images/me-again.jpg">
+          Sketchbook
         </NavigationItem>
       </NavigationRow>
     </nav>
@@ -104,7 +104,7 @@ function HeaderInner({ panelId, icon: Icon, toggleRef, expanded, onToggle, inver
           Ari's Art Design
         </a>
         <div className="flex items-center gap-x-8">
-          <a href="/gallery">Gallery</a>
+          {/* <a href="/world-building">World Building</a> */}
 
           <button
             ref={toggleRef}
@@ -176,27 +176,27 @@ export function Header() {
               isHome={true}
             />
           </div>
-          <Navigation />
+          {!isHome && <Navigation />}
           <div className="relative bg-neutral-950 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-neutral-800">
             <Container>
               <div className="grid grid-cols-1 gap-y-10 pb-16 pt-10 sm:grid-cols-2 sm:pt-16">
                 <div>
-                  <h2 className="font-display text-base font-semibold text-white">Links</h2>
-                  <ul className="font-display text-base text-white">
+                  <h2 className="font-semibold text-white font-display text-2xl">Links</h2>
+                  <ul className="text-base text-white mt-4">
                     <li>
-                      <a className="block py-2 hover:opacity-90" href="/about">
+                      <a className="block py-2 text-gray-400 hover:text-white" href="/about">
                         About
                       </a>
                     </li>
                     <li>
-                      <a className="block py-2 hover:opacity-90" href="/commission">
+                      <a className="block py-2 text-gray-400 hover:text-white" href="/commission">
                         Commissions
                       </a>
                     </li>
                   </ul>
                 </div>
                 <div className="sm:border-l sm:border-transparent sm:pl-16">
-                  <h2 className="font-display text-base font-semibold text-white">Follow Me</h2>
+                  <h2 className="text-2xl font-semibold text-white font-display">Follow Me</h2>
                   <SocialLinks className="mt-6 flex gap-x-10" linkClassName="text-gray-600 hover:text-white" />
                 </div>
               </div>

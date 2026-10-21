@@ -10,7 +10,7 @@
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --font-serif:
     Cinzel, ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-
+  --font-display: Hubballi, Gaegu, ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
   --color-banner: #dcc295;
 
   --color-primary-dark: #f59e0b;

@@ -5,16 +5,26 @@ import SocialLinks from './SocialLinks'
       <div
         class="  mx-auto border-t border-stone-50 bg-white shadow-sm dark:border-stone-900 dark:bg-black"
       >
-        <div class="bg-white sm:px-20 border-t border-gray-900/10">
+        <div class="bg-white px-4 sm:px-20 border-t border-gray-900/10 outline sm:grid lg:grid-cols-[1fr_auto_1fr] py-8 gap-4">
+
+          <nav aria-label="Footer" class="flex flex-col sm:flex-row sm:flex-wrap gap-x-6 gap-y-3">
+            <a class="text-sm text-gray-600 hover:text-gray-900" href="/world-building">World Building</a>
+            <a class="text-sm text-gray-600 hover:text-gray-900" href="/c/visual-development">Visual Dev</a>
+            <a class="text-sm text-gray-600 hover:text-gray-900" href="/c/character-design">Character Design</a>
+            <a class="text-sm text-gray-600 hover:text-gray-900" href="/sketchbook">Sketchbook</a>
+            <a class="text-sm text-gray-600 hover:text-gray-900" href="/about">About</a>
+            <a class="text-sm text-gray-600 hover:text-gray-900" href="/commission">Commissions</a>
+          </nav>
 
           <div
-            class=" pt-8 md:flex md:items-center md:justify-between pb-10"
-          >
-            <SocialLinks className="flex gap-x-6 md:order-2" />
-            <p class="mt-8 text-gray-600 md:order-1 md:mt-0">
-              &copy; {new Date().getFullYear()} Ari's Art Designs, Inc. All rights
+            class="text-center mt-4 sm:mt-0 flex items-center justify-center"
+          > &copy; {new Date().getFullYear()} Ari's Art Designs &mdash; All rights
               reserved.
-            </p>
+          </div>
+          <div class="md:justify-center lg:justify-end flex mt-4 sm:mt-0 flex-col md:flex-row items-center">
+
+            <SocialLinks className="flex gap-x-6 md:order-2" />
+
           </div>
         </div>
       </div>
